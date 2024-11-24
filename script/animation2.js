@@ -11,13 +11,19 @@ function adminPP() {
     window.location.href = "admin.html"
 }
 
-function show_burger() {
+var bugershowId = document.getElementById("bugershow")
 
-    var burger_overlayId = document.getElementById("burger_overlay")
+var burger_overlayId = document.getElementById("burger_overlay")
 
-    burger_overlayId.style.width = "25%"
-
-}
+bugershowId.addEventListener("mouseover", () => {
+    burger_overlayId.style.width = "360px"
+})
+burger_overlayId.addEventListener("mouseover", () => {
+    burger_overlayId.style.width = "360px"
+})
+burger_overlayId.addEventListener("mouseout", () => {
+    burger_overlayId.style.width = "0"
+})
 
 function hide_burger() {
 

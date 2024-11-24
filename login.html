@@ -26,7 +26,7 @@
                         <label for="username"> Username:</label>
                         <div class="log_in_form_fill_overlay">
                             <div class="overlay_1"></div><!-- Overlay -->
-                            <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+                            <input type="text" id="username" name="username" placeholder="Enter your Username" required autocomplete="username">
                         </div>
                         
                     </div>
@@ -35,13 +35,13 @@
                         <label for="password"> Password:</label>
                         <div class="log_in_form_fill_overlay">
                             <div class="overlay_2"></div><!-- Overlay -->
-                            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+                            <input type="password" id="password" name="password" placeholder="Enter your Password" required autocomplete="new-password">
                             <img src="Icons/invisible.png" alt="images" onclick="showpasswd()" id="showpass">
                         </div>
                         
                     </div>
                     <div class="termsconds">
-                        <input type="checkbox" class="check" required>
+                        <input type="checkbox" id="check" required>
                         <p> You accept the <u><a href="">terms and conditions</a></u> and <br> <u><a href="">privacy policy.</a></u></p>
                     </div>
                    
