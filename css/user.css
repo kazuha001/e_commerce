@@ -195,7 +195,7 @@
 }
 .products_foods_ads {
     width: 100%;
-    height: 260px;
+    height: auto;
     flex-basis: 180px;
     border: 1px solid #000;
     overflow: hidden;
@@ -222,7 +222,7 @@
 }
 .products_foods_ads_info {
     width: 100%;
-    height: 100px;
+    height: auto;
     display: flex;
     flex-flow: column;
     
