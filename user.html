@@ -15,6 +15,11 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="overlay_burger" id="bugershow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <div class="header_left">
                 <div class="title">
                     <div class="overlay_1"></div>
@@ -24,11 +29,13 @@
                     <select disabled id="categories">
                         <option>Categories</option>
                     </select>
+                    
                     <select disabled id="about">
-                        <option value="">About us</option>
+                        <option value="">About me</option>
                     </select>
                 </nav>
             </div>
+            
             <div class="header_right">
                 
                 <div class="search">
@@ -39,20 +46,174 @@
                 <div class="user_information">
                     <div>
                         <div class="overlay_1"></div><!-- Overlay -->
-                        <p>My profile</p>
+                        <p>Profile</p>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="overlay" id="overlay">
+                <div class="categories">
+                    
+                    <div class="categories_left">
+                        <h2>All Categories</h2>
+                        <div class="categories_overview" id="opt1"><h3>Fruits</h3></div>
+                        <div class="categories_overview" id="opt2"><h3>Vegetables</h3></div>
+                        <div class="categories_overview" id="opt3"><h3>Grains</h3></div>
+                        <div class="categories_overview" id="opt4"><h3>Proteins</h3></div>
+                        <div class="categories_overview" id="opt5"><h3>Dairy</h3></div>
+                        <div class="categories_overview" id="opt6"><h3>Fats and Oils</h3></div>
+                        <div class="categories_overview" id="opt7"><h3>Snacks</h3></div>
+                        <div class="categories_overview" id="opt8"><h3>Desserts</h3></div>
+                        <div class="categories_overview" id="opt9"><h3>Beverages</h3></div>
+                        <div class="categories_overview" id="opt10"><h3>Fast Foods</h3></div>
+                    </div>
+                    <div class="categories_center">
+                        <div class="categories_center_hidden" id="fruits">
+                            <h2>Based On</h2>
+                            <span ><h4>Apples</h4></span>
+                            <span><h4>Bananas</h4></span>
+                            <span><h4>Oranges</h4></span>
+                            <span><h4>Grapes</h4></span>
+                            <span><h4>Mangoes</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="vegetables">
+                            <h2>Based On</h2>
+                            <span ><h4>Carrots</h4></span>
+                            <span><h4>Broccoli</h4></span>
+                            <span><h4>Spinach</h4></span>
+                            <span><h4>Potatoes</h4></span>
+                            <span><h4>Peppers</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Grains">
+                            <h2>Based On</h2>
+                            <span ><h4>Rice</h4></span>
+                            <span><h4>Wheat</h4></span>
+                            <span><h4>Oats</h4></span>
+                            <span><h4>Quinoa</h4></span>
+                            <span><h4>Barley</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Proteins">
+                            <h2>Based On</h2>
+                            <span ><h4>Chicken</h4></span>
+                            <span><h4>Beef</h4></span>
+                            <span><h4>Pork</h4></span>
+                            <span><h4>Fish</h4></span>
+                            <span><h4>Crab</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Dairy">
+                            <h2>Based On</h2>
+                            <span ><h4>Milk</h4></span>
+                            <span><h4>Cheese</h4></span>
+                            <span><h4>Yogurt</h4></span>
+                            <span><h4>Butter</h4></span>
+                            <span><h4>Cream</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Fats_and_Oils">
+                            <h2>Based On</h2>
+                            <span ><h4>Olive Oil</h4></span>
+                            <span><h4>Coconut Oil</h4></span>
+                            <span><h4>Butter</h4></span>
+                            <span><h4>Avocados</h4></span>
+                            <span><h4>Nuts</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Snacks">
+                            <h2>Based On</h2>
+                            <span ><h4>Chips</h4></span>
+                            <span><h4>Crackers</h4></span>
+                            <span><h4>Cookies</h4></span>
+                            <span><h4>Popcorn</h4></span>
+                            <span><h4>Nuts</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Desserts">
+                            <h2>Based On</h2>
+                            <span ><h4>Ice Cream</h4></span>
+                            <span><h4>Cakes</h4></span>
+                            <span><h4>Pies</h4></span>
+                            <span><h4>Pastries</h4></span>
+                            <span><h4>Chocolates</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Beverages">
+                            <h2>Based On</h2>
+                            <span ><h4>Water</h4></span>
+                            <span><h4>Coffee</h4></span>
+                            <span><h4>Tea</h4></span>
+                            <span><h4>Juice</h4></span>
+                            <span><h4>Smoothies</h4></span>
+                        </div>
+                        <div class="categories_center_hidden" id="Fast_Foods">
+                            <h2>Based On</h2>
+                            <span ><h4>Burgers</h4></span>
+                            <span><h4>Pizza</h4></span>
+                            <span><h4>Fries</h4></span>
+                            <span><h4>Tacos</h4></span>
+                            <span><h4>Sandwiches</h4></span>
+                        </div>
+                    </div>
+                    <div class="categories_right"></div>
+
+                </div>
+        </div>
         <div class="content">
-            <div class="content_left"></div>
-            <div class="content_right"></div>
+            <div class="content_top">
+                <div class="content_top_reconds">
+                    <div class="content_top_reconds_title">
+                        <h2>Popular Shop</h2>
+                    </div>
+                    <div class="content_top_reconds_shop">
+
+                        <!-- Changes -->
+                        <div class="shop">
+                            <div class="shop_logo">
+                                <img src="images/images.png" alt="logo">
+                            </div>
+                            <div class="shop_name">
+                                <p>Cordy's Foods Shop</p>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="content_bottom">
+                <div class="products">
+                    <div class="products_title">
+                        <h2>Food's Recommendation</h2>
+                    </div>
+
+                    <div class="products_foods">
+
+                        <!-- Changes -->
+                        <div class="products_foods_ads">
+                            <div class="products_foods_ads_image">
+                                <img src="images/images.png" alt="images">
+                            </div>
+                            <div class="products_foods_ads_info">
+                                <h3>Dumplings</h3>
+                                <p> $1 / <u>Shipping Included</u></p>
+                                <div class="products_foods_ads_info_funtion">
+                                    <form action="">
+                                        <button type="submit" style="border-right: 1px solid #000;">Add to Cart</button>
+                                        <button type="submit">Buy</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+                </div>
+                
+                
+            </div>
         </div>
     </div>
 </body>
 <footer>
 
 </footer>
-<script>
-</script>
+<script src="script/animation3.js"></script>
 </html>
