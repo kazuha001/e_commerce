@@ -20,11 +20,10 @@
 .log_in_form {
     width: 40%;
     height: auto;
-    background-color: #0ff;
+    background-color: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
     flex-flow: column;
     position: relative;
     margin: 90px;
@@ -60,7 +59,7 @@
     width: auto;
     height: auto;
     display: flex;
-    border: 2px solid #000;
+    border: 2px solid #b0e0e6;
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
@@ -103,7 +102,7 @@
     height: auto;
     display: flex;
     overflow: hidden;
-    border: 2px solid #000;
+    border: 2px solid #0ff;
     border-radius: 15px;
     background-color: #fff;
     cursor: pointer;
@@ -138,11 +137,10 @@
 .sign_in_form {
     width: 40%;
     height: auto;
-    background-color: #0ff;
+    background-color: #eee;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
     flex-flow: column;
     position: relative;
     margin: 120px;
@@ -177,7 +175,7 @@
     width: 100%;
     height: auto;
     display: flex;
-    border: 2px solid #000;
+    border: 2px solid #0ff;
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
@@ -224,7 +222,7 @@ select {
     height: auto;
     display: flex;
     overflow: hidden;
-    border: 2px solid #000;
+    border: 2px solid #0ff;
     border-radius: 15px;
     background-color: #fff;
     cursor: pointer;
@@ -252,7 +250,7 @@ select {
     position: absolute;
     top: -60px;
     overflow: hidden;
-    border: 10px solid #0ff;
+    border: 2px solid #0ff;
     border-radius: 1000vh;
     width: 150px;
     height: 150px;
@@ -385,6 +383,22 @@ select {
 .log_in_form_button_overlay:hover .overlay_15{
     background-image: url('Icons/import.gif');
 }
+.overlay_16 {
+    background-image: url('Icons/gender-equality.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_16{
+    background-image: url('Icons/gender-equality.gif');
+}
+.overlay_17 {
+    background-image: url('Icons/home.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_17{
+    background-image: url('Icons/home.gif');
+}
 
 /* Condition */
 .termsconds {
@@ -406,17 +420,11 @@ select {
 }
 /* Responsive */
 @media (max-width: 1200px) {
-    .log_in {
+    .log_in, .sign_in {
         width: 1200px;
     }
-    .sign_in {
-        width: 1200px;
-    }
-    .log_in_form {
-        width: 350px;
-        margin: 120px 0 20px 0;
-    }
-    .sign_in_form {
+    
+    .log_in_form, .sign_in_form {
         width: 350px;
         margin: 120px 0 20px 0;
     }

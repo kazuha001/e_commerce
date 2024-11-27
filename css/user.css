@@ -14,6 +14,10 @@
     align-items: center;
     flex-wrap: wrap;
     box-shadow: 0 0 5px 1px #000;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    background-color: #eee;
 }
 .header_left {
     width: 50%;
@@ -101,6 +105,7 @@
     justify-content: center;
     align-items: center;
     flex-flow: column;
+    margin: 50px 0 0 0;
 }
 .content_top {
     width: 100%;
@@ -147,11 +152,8 @@
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
-    transition: 0.8s ease-in-out;
 }
-.shop:hover {
-    transform: scale(0.9);
-}
+
 .shop_logo {
     width: 70px;
     height: 70px;
@@ -205,11 +207,8 @@
     align-items: center;
     cursor: pointer;
     margin: 10px;
-    transition: 0.7s ease-in-out;
 }
-.products_foods_ads:hover {
-    transform: scale(1.1);
-}
+
 .products_foods_ads_image {
     width: 100%;
     height: 160px;
@@ -291,7 +290,7 @@
     background-color: #fff;
     border-bottom: 1px solid #000;
     position: fixed;
-    top: 50px;
+    top: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -301,9 +300,12 @@
 .categories {
     width: 100%;
     height: auto;
-    display: flex;
+    display: none;
     justify-content: left;
     align-items: center;
+    transition: 1s ease-in-out;
+    transform: translateX(20px);
+    opacity: 0;
 }
 .categories_left {
     width: 30%;
@@ -363,7 +365,77 @@
 .categories_center_hidden h4 {
     margin: 15px;
 }
+.about_me {
+    width: 100%;
+    height: auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: 1s ease-in-out;
+    overflow: hidden;
+    transform: translateX(20px);
+    opacity: 0;
+}
+.about_me_elements {
+    width: 20%;
+    height: auto;
+    margin: 20px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.about_me_elements h3 {
+    margin: 10px;
+}
+.about_me_elements_img {
+    width: 100%;
+    height: 270px;
+    background-size: cover;
+}
+.about_me_overlay_left {
+    background-image: url("Icons/document.png");
+}
+.about_me_overlay_right {
+    background-image: url("Icons/privacy-policy.png");
+}
+.about_me_elements:hover .about_me_overlay_left {
+    background-image: url("Icons/document.gif");
+}
+.about_me_elements:hover .about_me_overlay_right {
+    background-image: url("Icons/privacy-policy.gif");
+}
+.user_information_overlay {
+    width: 10%;
+    height: 0;
+    position: fixed;
+    top: 45px;
+    right: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    z-index: 2;
+    border-bottom: 0px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+.user_information_overlay span {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
+}
+.user_information_overlay span:hover {
+    background-color: #d9d9d9;
+}
 /* Responsive */
 @media (max-width: 760px) {
     .header {

@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="css/user.css">
 
 </head>
-<body>
+<body style="background-color: #eee;">
     <div class="container">
-        <div class="header">
+        <div class="header" >
             <div class="overlay_burger" id="bugershow">
                 <span></span>
                 <span></span>
@@ -36,14 +36,14 @@
                 </nav>
             </div>
             
-            <div class="header_right">
+            <div class="header_right" >
                 
-                <div class="search">
+                <div class="search" id="header_prevention">
                     <form action="">
                         <input type="text" placeholder="What are you looking for?" id="search" name="search">
                     </form>
                 </div>
-                <div class="user_information">
+                <div class="user_information" id="user_information">
                     <div>
                         <div class="overlay_1"></div><!-- Overlay -->
                         <p>Profile</p>
@@ -51,8 +51,14 @@
                 </div>
             </div>
         </div>
+        <div class="user_information_overlay" id="user_information_overlay">
+            <span><h4>My Profile</h4></span>
+            <span><h4>Carts</h4></span>
+            <span><h4>Ordered</h4></span>
+            <span><h4>Log out</h4></span>
+        </div>
         <div class="overlay" id="overlay">
-                <div class="categories">
+                <div class="categories" id="categories_overlay">
                     
                     <div class="categories_left">
                         <h2>All Categories</h2>
@@ -152,6 +158,21 @@
                     <div class="categories_right"></div>
 
                 </div>
+                <div class="about_me" id="about_me">
+                    <div class="about_me_elements">
+                        <div class="about_me_elements_img about_me_overlay_left">
+
+                        </div><!--Overlay-->
+                        <h3>Terms of Condition</h3>
+                    </div>
+                    <div class="about_me_elements">
+                        <div class="about_me_elements_img about_me_overlay_right">
+
+                        </div><!--Overlay-->
+                        <h3>Privacy Policy</h3>
+                    </div>
+                </div>
+                
         </div>
         <div class="content">
             <div class="content_top">

@@ -12,7 +12,7 @@
     
     <link rel="stylesheet" href="css/log_in_sign_up.css">
 </head>
-<body>
+<body style="background-image: url('images/overlay_bg.jpg');">
     
     <div class="container">
         <div class="sign_in">
@@ -25,6 +25,19 @@
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_5"></div><!-- Overlay -->
                             <input type="text" id="fname" name="fname" placeholder="Enter your Fullname" required>
+                        </div>
+                        
+                    </div>
+                    <div class="sign_in_form_fill">
+                        <label for="gender"> Gender:</label>
+                        <div class="sign_in_form_fill_overlay">
+                            <div class="overlay_16"></div><!-- Overlay -->
+                            <select name="gender" id="gender">
+                                <option value="" disabled>Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="N/A">Not to Tell</option>
+                            </select>
                         </div>
                         
                     </div>
@@ -49,6 +62,14 @@
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_7"></div><!-- Overlay -->
                             <input type="email" id="email" name="email" placeholder="Enter your Email @" required autocomplete="email">
+                        </div>
+                        
+                    </div>
+                    <div class="sign_in_form_fill">
+                        <label for="address"> address:</label>
+                        <div class="sign_in_form_fill_overlay">
+                            <div class="overlay_17"></div><!-- Overlay -->
+                            <input type="address" id="address" name="address" placeholder="Enter your Address" required autocomplete="street-address">
                         </div>
                         
                     </div>

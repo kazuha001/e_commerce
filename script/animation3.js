@@ -1,8 +1,19 @@
 
+    var header_preventionId = document.getElementById("header_prevention")
 
     var categoriesId = document.getElementById("categories")
 
+    var aboutId = document.getElementById("about")
+
+    var user_informationId = document.getElementById("user_information")
+
+    var user_information_overlayId = document.getElementById("user_information_overlay")
+
     var overlayId = document.getElementById("overlay")
+
+    var categories_overlayId = document.getElementById("categories_overlay")
+
+    var about_meId = document.getElementById("about_me")
 
     var opt1Id = document.getElementById("opt1")
 
@@ -47,16 +58,70 @@
     var preventionsId = document.getElementById("preventions")
 
     categoriesId.addEventListener("mouseover", () => {
-        overlayId.style.height = "570px"
+        overlayId.style.height = "600px"
+        categories_overlayId.style.display = "flex"
+        about_meId.style.display = "none"
+        about_meId.style.transform = "translateX(20px)"
+        about_meId.style.opacity = "0"
+        user_information_overlayId.style.height = "0"
+        user_information_overlayId.style.borderBottom = "0px solid #000"
+        setTimeout(() => {
+            categories_overlayId.style.transform = "translateX(0)"
+            categories_overlayId.style.opacity = "1"
+        }, 500)
     })
-    overlayId.addEventListener("mouseover", () => {
-        overlayId.style.height = "570px"
+    categories_overlayId.addEventListener("mouseover", () => {
+        overlayId.style.height = "600px"
+    })
+    aboutId.addEventListener("mouseover", () => {
+        overlayId.style.height = "420px"
+        categories_overlayId.style.display = "none"
+        about_meId.style.display = "flex"
+        categories_overlayId.style.transform = "translateX(20px)"
+        categories_overlayId.style.opacity = "0"
+        user_information_overlayId.style.height = "0"
+        user_information_overlayId.style.borderBottom = "0px solid #000"
+        setTimeout(() => {
+            about_meId.style.transform = "translateX(0)"
+            about_meId.style.opacity = "1"
+        }, 500)
+    })
+    about_meId.addEventListener("mouseover", () => {
+        overlayId.style.height = "420px"
     })
     overlayId.addEventListener("mouseout", () => {
         overlayId.style.height = "0"
     })
 
-
+    user_informationId.addEventListener("mouseover", () => {
+        user_information_overlayId.style.borderBottom = "2px solid #000"
+        setTimeout(() => {
+            user_information_overlayId.style.height = "120px"
+        })
+        overlayId.style.height = "0"
+        categories_overlayId.style.transform = "translateX(20px)"
+        categories_overlayId.style.opacity = "0"
+        about_meId.style.transform = "translateX(20px)"
+        about_meId.style.opacity = "0"
+    })
+    user_information_overlayId.addEventListener("mouseover", () => {
+        user_information_overlayId.style.height = "120px"
+        user_information_overlayId.style.borderBottom = "2px solid #000"
+        
+    })
+    user_information_overlayId.addEventListener("mouseout", () => {
+        user_information_overlayId.style.height = "0"
+        user_information_overlayId.style.borderBottom = "0px solid #000"
+    })
+    header_preventionId.addEventListener("mouseover", () => {
+        user_information_overlayId.style.borderBottom = "0px solid #000"
+        user_information_overlayId.style.height = "0"
+        overlayId.style.height = "0"
+        categories_overlayId.style.transform = "translateX(20px)"
+        categories_overlayId.style.opacity = "0"
+        about_meId.style.transform = "translateX(20px)"
+        about_meId.style.opacity = "0"
+    })
     //Opt1
     opt1Id.addEventListener("mouseover", () => {
         opt1Id.style.backgroundColor = "#000"

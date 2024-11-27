@@ -7,7 +7,7 @@
 .header {
     width: 100%;
     height: auto;
-    background-color: #0ff;
+    background-color: #2e8b57;
     display: flex;
     justify-content: left;
     align-items: center;
@@ -21,12 +21,13 @@
 }
 .tables_function h1 {
     margin: 10px;
+    color: #fff;
 }
 .tables_function_elements {
     width: 1200px;
     height: auto;
     margin: 10px;
-    background-color: #000;
+    background-color: #fff;
 }
 .tables_function_elements button {
     width: 70px;
@@ -47,19 +48,21 @@
     height: auto;
 }
 .tables_function_elements thead {
-    background-color: aqua;
+    background-color: #1e1e1e;
+    color: #fff;
 }
 .tables_function_elements td {
     text-align: center;
-    background-color: #fff;
+    background-color: #1e1e1e;
     height: 50px;
+    color: #fff;
 }
 /* Overlay */
 .overlay_burger_menu {
     position: fixed;
     width: 0;
     height: 720px;
-    background-color: #0ff;
+    background-color: #2e8b57;
     overflow: hidden;
     transition: 0.5s ease-in-out;
 }
@@ -114,7 +117,7 @@
 }
 .content_profile {
     width: 100%;
-    height: auto;
+    height: 540px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,10 +130,11 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border: 2px solid #000;
+    border: 2px solid #2e8b57;
     border-radius: 1000vh;
     margin: 20px;
     flex-basis: 230px;
+    
 }
 .profile img {
     width: 100%;
@@ -143,7 +147,7 @@
     justify-content: space-evenly;
     align-items: center;
     flex-flow: column;
-    flex-basis: 320px;
+    flex-basis: 420px;
 }
 .information div {
     display: flex;
@@ -154,10 +158,15 @@
     font-size: 20px;
     font-weight: bold;
     margin: 0 0 0 10px;
+    color: #fff;
 }
 .information label {
     font-size: 20px;
     font-weight: bolder;
+    color: #fff;
+}
+.information h1 {
+    color: #fff;
 }
 .overlay_title {
     width: 280px;
