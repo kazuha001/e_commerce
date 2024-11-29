@@ -399,6 +399,14 @@ select {
 .sign_in_form_fill_overlay:hover .overlay_17{
     background-image: url('Icons/home.gif');
 }
+.overlay_18 {
+    background-image: url('Icons/up.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_18{
+    background-image: url('Icons/up.gif');
+}
 
 /* Condition */
 .termsconds {
