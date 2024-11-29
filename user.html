@@ -14,8 +14,118 @@
 </head>
 <body style="background-color: #eee;">
     <div class="container">
+        <div class="burger_menu" id="burger_menu">
+            <div class="title" id="burger_menu">
+                <div class="overlay_1"></div>
+                <h2>Cord'y Food</h2>
+                
+            </div>
+                <select disabled id="categories_function">
+                    <option>Categories</option>
+                </select>
+                <div class="burger_menu_items">
+                    <span><h4>Fruits</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span onclick="apple()"><h4>Apples</h4></span>
+                        <span><h4>Bananas</h4></span>
+                        <span><h4>Oranges</h4></span>
+                        <span><h4>Grapes</h4></span>
+                        <span><h4>Mangoes</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Vegetables</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Carrots</h4></span>
+                        <span><h4>Broccoli</h4></span>
+                        <span><h4>Spinach</h4></span>
+                        <span><h4>Potatoes</h4></span>
+                        <span><h4>Peppers</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Grains</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Rice</h4></span>
+                            <span><h4>Wheat</h4></span>
+                            <span><h4>Oats</h4></span>
+                            <span><h4>Quinoa</h4></span>
+                            <span><h4>Barley</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Proteins</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Chicken</h4></span>
+                            <span><h4>Beef</h4></span>
+                            <span><h4>Pork</h4></span>
+                            <span><h4>Fish</h4></span>
+                            <span><h4>Crab</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Dairy</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Milk</h4></span>
+                            <span><h4>Cheese</h4></span>
+                            <span><h4>Yogurt</h4></span>
+                            <span><h4>Butter</h4></span>
+                            <span><h4>Cream</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Fats and Oils</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Olive Oil</h4></span>
+                            <span><h4>Coconut Oil</h4></span>
+                            <span><h4>Butter</h4></span>
+                            <span><h4>Avocados</h4></span>
+                            <span><h4>Nuts</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Snacks</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Chips</h4></span>
+                            <span><h4>Crackers</h4></span>
+                            <span><h4>Cookies</h4></span>
+                            <span><h4>Popcorn</h4></span>
+                            <span><h4>Nuts</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Desserts</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Ice Cream</h4></span>
+                            <span><h4>Cakes</h4></span>
+                            <span><h4>Pies</h4></span>
+                            <span><h4>Pastries</h4></span>
+                            <span><h4>Chocolates</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Beverages</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Water</h4></span>
+                            <span><h4>Coffee</h4></span>
+                            <span><h4>Tea</h4></span>
+                            <span><h4>Juice</h4></span>
+                            <span><h4>Smoothies</h4></span>
+                    </div>
+                    </span>
+                    <span><h4>Fast Foods</h4>
+                    <div class="burger_menu_items_dropdown">
+                        <span ><h4>Burgers</h4></span>
+                            <span><h4>Pizza</h4></span>
+                            <span><h4>Fries</h4></span>
+                            <span><h4>Tacos</h4></span>
+                            <span><h4>Sandwiches</h4></span>
+                    </div>
+                    
+                    </span>
+                </div>
+                <select disabled id="about_burger">
+                    <option value="">About me</option>
+                </select>
+                <div class="burger_menu_items_2">
+                    <span><h4>Terms Of Condition</h4></span>
+                    <span><h4>Privacy Policy</h4></span>
+                </div>
+        </div>
         <div class="header" >
-            <div class="overlay_burger" id="bugershow">
+            <div class="overlay_burger" onclick="burger_function()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -48,15 +158,17 @@
                         <div class="overlay_1"></div><!-- Overlay -->
                         <p>Profile</p>
                     </div>
+                    <div class="user_information_overlay" id="user_information_overlay">
+                        <span><h4>My Profile</h4></span>
+                        <span><h4>My Carts</h4></span>
+                        <span><h4>My Purchases</h4></span>
+                        <span><h4>Log out</h4></span>
+                    </div>
                 </div>
             </div>
+            
         </div>
-        <div class="user_information_overlay" id="user_information_overlay">
-            <span><h4>My Profile</h4></span>
-            <span><h4>Carts</h4></span>
-            <span><h4>Ordered</h4></span>
-            <span><h4>Log out</h4></span>
-        </div>
+        
         <div class="overlay" id="overlay">
                 <div class="categories" id="categories_overlay">
                     
@@ -174,7 +286,7 @@
                 </div>
                 
         </div>
-        <div class="content">
+        <div class="content" id="content">
             <div class="content_top">
                 <div class="content_top_reconds">
                     <div class="content_top_reconds_title">
