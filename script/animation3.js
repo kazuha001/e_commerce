@@ -5,6 +5,10 @@
 
     var aboutId = document.getElementById("about")
 
+    var contentId = document.getElementById("content")
+
+    var burger_menuId = document.getElementById("burger_menu")
+
     var user_informationId = document.getElementById("user_information")
 
     var user_information_overlayId = document.getElementById("user_information_overlay")
@@ -121,6 +125,22 @@
         categories_overlayId.style.opacity = "0"
         about_meId.style.transform = "translateX(20px)"
         about_meId.style.opacity = "0"
+    })
+    contentId.addEventListener("mouseover", () => {
+        user_information_overlayId.style.borderBottom = "0px solid #000"
+        user_information_overlayId.style.height = "0"
+        overlayId.style.height = "0"
+        categories_overlayId.style.transform = "translateX(20px)"
+        categories_overlayId.style.opacity = "0"
+        about_meId.style.transform = "translateX(20px)"
+        about_meId.style.opacity = "0"
+        burger_menuId.style.width = "0"
+    })
+    burger_menuId.addEventListener("mouseover", () => {
+        burger_menuId.style.width = "290px"
+    })
+    burger_menuId.addEventListener("mouseout", () => {
+        burger_menuId.style.width = "0"
     })
     //Opt1
     opt1Id.addEventListener("mouseover", () => {
@@ -418,3 +438,10 @@
         Fast_FoodsId.style.display = "none"
     })
     
+function burger_function() {
+    
+    var burger_menuId = document.getElementById("burger_menu")
+
+    burger_menuId.style.width = "290px"
+
+}

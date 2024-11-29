@@ -4,7 +4,11 @@ function back() {
     window.location.href = "login.html"
 
 }
+function UPback() {
 
+    window.location.href = "user_pp.html"
+
+}
 function fback() {
 
     window.location.href = "login.html"
