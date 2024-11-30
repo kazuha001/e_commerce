@@ -12,8 +12,60 @@
     <link rel="stylesheet" href="css/user.css">
 
 </head>
-<body style="background-color: #eee;">
-    <div class="container">
+<body style="background-color: #eee; position: relative;">
+    <div class="products_foods_popup" id="products_foods_popup">
+        <div class="products_foods_popup_top">
+            <p id="close_popup">&times;</p>
+        </div>
+        <div class="products_foods_popup_bottom">
+            <div class="products_foods_popup_bottom_img">
+                
+                <img src="images/images.png" alt="">
+                
+                <div>
+                    <h2 id="products_name"></h2><h2 id="price"></h2>
+                </div>
+            </div>
+            <form action="" method="POST" id="resetf0">
+                <div class="products_foods_popup_bottom_adds_on">
+                    <div>
+                    <h2>Options</h2>
+                    <label>
+                        <input type="radio" name="choose" value="regular" id="opt" required>Steam <p></p>
+                    </label>
+                    </div>
+                    <div>
+                    <h2>Adds On</h2>
+                    <label>
+                        <input type="checkbox" name="choos2" value="ice tea" id="select">Ice Tea <p></p>
+                    </label>
+                    </div>
+                </div>
+            <div class="products_foods_popup_bottom_quantity_function">
+                <div class="products_foods_popup_bottom_quantity_function_elements1">
+                    
+                    <button onclick="minus_qty()" type="button"><p>&minus;</p></button>
+                    <h2 id="qty_result">1</h2>
+                    <button onclick="plus_qty()" type="button"><p>&plus;</p></button>
+                </div>
+                <div class="products_foods_popup_bottom_quantity_function_elements2">
+                    
+                    <button type="submit">Purchase - &nbsp;<p id="total_result"></p></button>
+                </div>
+                <input type="hidden" id="org_price2" value="">
+                <input type="hidden" id="qty" value="1" required>
+                <input type="hidden" id="total" value="">
+
+                <!-- Important -->
+                <input type="hidden" id="PRID" name="productId" value="" required>
+
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="hide_bg" id="hide_bg"></div>
+        
         <div class="burger_menu" id="burger_menu">
             <div class="title" id="burger_menu">
                 <div class="overlay_1"></div>
@@ -150,7 +202,7 @@
                 
                 <div class="search" id="header_prevention">
                     <form action="">
-                        <input type="text" placeholder="What are you looking for?" id="search" name="search">
+                        <input type="search" placeholder="What are you looking for?" id="search" name="search">
                     </form>
                 </div>
                 <div class="user_information" id="user_information">
@@ -325,15 +377,18 @@
                             </div>
                             <div class="products_foods_ads_info">
                                 <h3>Dumplings</h3>
-                                <p> $1 / <u>Shipping Included</u></p>
+                                <p> 500 / <u>Shipping Included</u></p>
                                 <div class="products_foods_ads_info_funtion">
-                                    <form action="">
-                                        <button type="submit" style="border-right: 1px solid #000;">Add to Cart</button>
-                                        <button type="submit">Buy</button>
-                                    </form>
+                                <input type="hidden" class="PRID" name="productId" value=""><!-- Important -->
+                                <input type="hidden" class="products_name" value="Dumplings">
+                                <input type="hidden" class="org_price" value="500">
+                                <button style="border-right: 1px solid #000;">Add to Cart</button>
+                                <button class="buy">Order</button>
+                                    
                                 </div>
                             </div>
                         </div>
+                        
                         
 
                     </div>
