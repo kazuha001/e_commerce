@@ -491,7 +491,7 @@ function burger_function() {
 
             priceId.innerText = org_priceId
 
-            products_foods_popupId.style.display = "block"
+            products_foods_popupId.style.display = "flex"
 
             PRIDrecieve.innerText = PRIDresult
 
