@@ -535,7 +535,7 @@
     cursor: pointer;
 }
 .products_foods_popup {
-    position: fixed;
+    position: absolute;
     width: 550px;
     height: 768px;
     background-color: #fff;
