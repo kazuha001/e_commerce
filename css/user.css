@@ -535,14 +535,14 @@
     cursor: pointer;
 }
 .products_foods_popup {
-    position: absolute;
+    position: fixed;
     width: 550px;
     height: 768px;
     background-color: #fff;
     right: -100%;
     top: 0;
     z-index: 3;
-    display: flex;
+    display: none;
     flex-flow: column;
     transition: 0.5s ease-in-out;
 }
@@ -726,6 +726,7 @@
     .products_foods_popup {
         width: 100%;
         position: absolute;
+        margin: 0;
     }
     .products_foods_popup_bottom_img h2 {
         font-size: 17px;
