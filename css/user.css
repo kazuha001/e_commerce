@@ -199,7 +199,7 @@
 .products_foods_ads {
     width: 100%;
     height: auto;
-    flex-basis: 180px;
+    flex-basis: 155px;
     border: 1px solid #000;
     overflow: hidden;
     display: flex;
@@ -246,14 +246,10 @@
     align-items: center;
     margin: 5px 0 0 0;
 }
-.products_foods_ads_info_funtion form {
-    width: 100%;
-    height: 40px;
-    display: flex;
-}
+
 .products_foods_ads_info_funtion button {
     width: 50%;
-    height: 100%;
+    height: 40px;
     background: transparent;
     border: transparent;
     border-top: 1px solid #000;
@@ -538,6 +534,159 @@
     font-size: 30px;
     cursor: pointer;
 }
+.products_foods_popup {
+    position: fixed;
+    width: 550px;
+    height: 768px;
+    background-color: #fff;
+    right: -100%;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    flex-flow: column;
+    transition: 0.5s ease-in-out;
+}
+.products_foods_popup_bottom form {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+}
+.products_foods_popup_top {
+    width: 10%;
+    height: 50px;
+    cursor: pointer;
+}
+.products_foods_popup_top p {
+    font-size: 40px;
+    margin: 0 0 0 15px;
+}
+.products_foods_popup_bottom_img {
+    width: 100%;
+    height: 150px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 2px solid #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
+}
+.products_foods_popup_bottom_img img {
+    width: 140px;
+    height: 140px;
+    padding: 20px;
+}
+.products_foods_popup_bottom_img div {
+    width: 80%;
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.products_foods_popup_bottom_img h2 {
+    margin: 25px;
+    font-size: 21px;
+}
+.products_foods_popup_bottom_adds_on {
+    width: 100%;
+    height: 450px;
+    overflow: auto;
+}
+
+.products_foods_popup_bottom_adds_on div {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+    padding: 15px;
+}
+.products_foods_popup_bottom_adds_on label {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 20px;
+    border-bottom: 2px solid #d9d9d9;
+    position: relative;
+    cursor: pointer;
+}
+.products_foods_popup_bottom_adds_on p {
+    position: absolute;
+    right: 10px;
+    font-size: 16px;
+}
+.products_foods_popup_bottom_adds_on input {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+.products_foods_popup_bottom_quantity_function {
+    width: 100%;
+    height: 130px;
+    border-top: 2px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.products_foods_popup_bottom_quantity_function_elements1 {
+    width: 30%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.products_foods_popup_bottom_quantity_function_elements2 {
+    width: 70%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.products_foods_popup_bottom_quantity_function_elements1 button {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #d9d9d9;
+    margin: 20px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: transparent;
+}
+.products_foods_popup_bottom_quantity_function_elements1 button p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    
+}
+.products_foods_popup_bottom_quantity_function_elements2 button {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    border: transparent;
+    border-radius: 15px;
+    background-color: #d9d9;
+    cursor: pointer;
+}
+.products_foods_popup_bottom_quantity_function_elements2 button:hover {
+    opacity: 0.8;
+}
+.hide_bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    background-color: #d9d9d9;
+    display: none;
+    opacity: 0.8;
+}
 /* Responsive */
 @media (max-width: 760px) {
     .header {
@@ -573,5 +722,15 @@
     .search input {
         margin: 0;
         width: 170px;
+    }
+    .products_foods_popup {
+        width: 100%;
+        position: absolute;
+    }
+    .products_foods_popup_bottom_img h2 {
+        font-size: 17px;
+    }
+    .products_foods_popup_bottom_quantity_function_elements1 {
+        width: 50%;
     }
 }
