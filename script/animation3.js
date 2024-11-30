@@ -593,4 +593,11 @@ function burger_function() {
 
     }
 
+    function adjustDivHeight() {
+        const div = document.getElementById('products_foods_popup')
+        div.style.height = `${window.innerHeight}px`
+    }
     
+    adjustDivHeight()
+
+    window.addEventListener('resize', adjustDivHeight)
