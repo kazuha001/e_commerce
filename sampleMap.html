@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Document</title>
+    <style>
+        #content {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        #printButton {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #printButton:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Document Printing Example</h1>
+    <div id="content">
+        <h2>Printable Content</h2>
+        <p>This is the content you want to print. You can include text, images, or any other HTML elements.</p>
+        <img src="https://via.placeholder.com/150" alt="Sample Image">
+    </div>
+    <button id="printButton">Print This Document</button>
+
+    <script>
+        document.getElementById("printButton").addEventListener("click", () => {
+            window.print(); // Open the print dialog
+        });
+    </script>
+</body>
+</html>

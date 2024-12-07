@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Domain</title>
+
+    <!-- CSS links -->
+    <link rel="stylesheet" href="css/default.css">
+
+    <!-- CSS admin -->
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+<body style="background-color: #1e1e1e;">
+    <div class="container">
+        <div class="overlay_burger_menu" id="burger_overlay">
+            <div class="overlay_title"><h1>Seller Option</h1></div>
+            <div class="overlay_burger_menu_function" onclick="ordered()"><h3>Ordered</h3></div>
+            <div class="overlay_burger_menu_function" onclick="sell_product()"><h3>Sell Products</h3></div>
+            <div class="overlay_burger_menu_function" onclick="seller_pp()"><img src="Icons/id-cardV2.png" alt=""><h3>Seller Profile</h3></div>
+        </div><!-- Overlay -->
+        <div class="header">
+            <div class="overlay_burger" id="bugershow">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="overlay_1"></div><!-- Overlay -->
+            <div class="title"><h2>User Ordered</h2></div>
+        </div>
+        <div class="content">
+            <div class="user_request" id="">
+                <div class="tables_function">
+                    <h1>User Request</h1>
+                    <div class="tables_function_elements">
+                        <table>
+                            <thead>
+                                <th style="width: 10%;">User Id</th>
+                                <th style="width: 20%;">Name</th>
+                                <th style="width: 20%;">Username</th>
+                                <th style="width: 10%;">Product ID</th>
+                                <th style="width: 10%;">Action</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Cordova</td>
+                                    <td>Kazuha</td>
+                                    <td>123456</td>
+                                    <td style="display: flex; justify-content: center; align-items: center;">
+                                        <form action="" method="POST">
+                                            <button style="background-color: #0f0;">CONFIRM</button>
+                                        </form>
+                                        <form action="" method="POST">
+                                            <button style="background-color: #f00;">CANCEL</button>
+                                        </form>
+                                        <form action="" method="POST">
+                                            <button style="background-color: #ff0;">See More Info</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="graph">
+           
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+
+</footer>
+
+<script src="script/shop.js"></script>
+
+</html>
