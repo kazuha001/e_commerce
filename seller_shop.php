@@ -1,0 +1,152 @@
+<?php
+
+session_start();
+
+if (isset($_SESSION["username"])) {
+
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "e_commerce";
+    
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    $username = $_SESSION["username"];
+
+    $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+
+        $accounts = $result->fetch_assoc();
+
+        $stmt2 = $conn->prepare("SELECT * FROM seller_shop WHERE user_id = ?");
+        $stmt2->bind_param("i", $accounts["id"]);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+
+        if ($result2->num_rows > 0) {
+
+            $shop_acc = $result2->fetch_assoc();
+
+            echo '
+            
+            <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Seller Domain</title>
+    
+        <!-- CSS links -->
+        <link rel="stylesheet" href="css/default.css">
+    
+        <!-- CSS admin -->
+        <link rel="stylesheet" href="css/admin.css">
+    
+    </head>
+    <body style="background-color: #1e1e1e;">
+        <div class="container">
+            <div class="overlay_burger_menu" id="burger_overlay">
+                <div class="overlay_title"><h1>Seller Option</h1></div>
+                <div class="overlay_burger_menu_function" onclick="ordered()"><h3>Ordered</h3></div>
+                <div class="overlay_burger_menu_function" onclick="sell_product()"><h3>Sell Products</h3></div>
+                <div class="overlay_burger_menu_function" onclick="seller_pp()"><img src="Icons/id-cardV2.png" alt=""><h3>Seller Profile</h3></div>
+            </div><!-- Overlay -->
+            <div class="header">
+                <div class="overlay_burger" id="bugershow">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="overlay_1"></div><!-- Overlay -->
+                <div class="title"><h2>Seller Tools</h2></div>
+            </div>
+            <div class="content_profile">
+                <div class="profile">
+                    <img src="images/images.png" alt="png">
+                </div>
+                <div><button style="cursor: pointer;">Upload Img</button></div>
+                <div class="information">
+                    <h1>Information</h1>
+                    <div>
+                        <label for="name">Name: </label>
+                        <p id="name">' . $shop_acc["shop_name"] . '</p>
+                    </div>
+                    <div>
+                        <label for="status">Status: </label>
+                        <p id="status">Seller</p>
+                    </div>
+                    <div>
+                        <label for="status">Publish Time: </label>
+                        <p id="status">' . $shop_acc["time"] . '</p>
+                    </div>
+                    <div>
+                        <label for="access">UID: </label>
+                        <p id="access">' . $shop_acc["id"] . '</p>
+                    </div>
+                    <div>
+                        <form action="user.php"><button style="cursor: pointer;">Log Out</button></form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+    
+    </footer>
+    
+    <script src="script/shop.js"></script>
+    
+    </html>
+            
+            ';
+
+
+        } else {
+            echo '<script>
+                        alert("Please Upgrade Your Acc to Major to access shop")
+                        window.location.href = "user_pp.php"
+                    </script>';
+            sleep(2);
+        
+            exit();
+        
+        }
+          
+
+
+    } else {
+
+        session_destroy();
+    echo '<script>
+                alert("Authentication Failed Session Destroy")
+                window.location.href = "login.html"
+            </script>';
+    sleep(2);
+
+    exit();
+
+    }
+
+
+} else {
+    session_destroy();
+    echo '<script>
+                alert("Authentication Failed Session Destroy")
+                window.location.href = "login.html"
+            </script>';
+    sleep(2);
+
+    exit();
+}
+
+
+
+
+
+
+?>
