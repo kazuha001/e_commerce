@@ -2,14 +2,42 @@
 include 'server.php';
 session_start();
 
+$limit = 30;  // Number of items per page
+$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+
 if (isset($_SESSION["username"])) {
 
 
     $session = $_SESSION["username"];
 
-    
+    $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+    $check->bind_param("s", $session);
+    $check->execute();
+    $check_result = $check->get_result();
+
+
+    $shop = $conn->prepare("SELECT * FROM seller_shop");
+    $shop->execute();
+    $shop_result = $shop->get_result();
+
+
+    $product = $conn->prepare("SELECT * FROM products_view LIMIT ? OFFSET ?");
+    $product->bind_param("ii", $limit, $start);
+    $product->execute();
+    $product_result = $product->get_result();
+
 
 } else {
+
+    session_destroy();
+    echo '<script>
+                alert("Authentication Failed Session Destroy")
+                window.location.href = "login.html"
+            </script>';
+    sleep(2);
+
+    exit();
+    
 
 }
 
@@ -30,7 +58,7 @@ if (isset($_SESSION["username"])) {
     <!-- User CSS -->
     <link rel="stylesheet" href="css/user.css">
 
-    
+    <link rel="stylesheet" href="css/loading.css">
 
 </head>
 <body style="background-color: #eee; position: relative;">
@@ -41,7 +69,7 @@ if (isset($_SESSION["username"])) {
         <div class="products_foods_popup_bottom">
             <div class="products_foods_popup_bottom_img">
                 
-                <img src="images/images.png" alt="">
+                <img id="img_change" src="" alt="images">
                 
                 <div>
                     <h2 id="products_name"></h2><h2 id="price"></h2>
@@ -215,12 +243,22 @@ if (isset($_SESSION["username"])) {
                     </form>
                 </div>
                 <div class="user_information" id="user_information">
-                    
-                        <div>
+                    <?php
+
+                        if ($check_result->num_rows > 0) {
+
+                            $user = $check_result->fetch_assoc();
+
+                            echo '
+                                <div>
                                     <div class="overlay_1"><img src="retrieve_img.php?user_id=' . $user['id'] . '" alt="PP"></div><!-- Overlay -->
                                 <p>' . $user["username"] . '</p>
-                        </div>
+                                </div>
+                            ';
 
+                        }
+                        
+                    ?>
                     <div class="user_information_overlay" id="user_information_overlay">
                         <form action="user_pp.php"><button><h4>My Profile</h4></button></form>
                         <form action="" method=""><button><h4>My Carts</h4></button></form>
@@ -355,9 +393,19 @@ if (isset($_SESSION["username"])) {
                     </div>
             <div class="content_top_reconds_shop">
 
+                 <?php
+                 
+                 if ($shop_result->num_rows > 0) {
 
-                 <!-- Changes -->
-                        <div class="shop" onclick="window.location.href = \'shop_interface.php?user_id=' . $rows["username"] . '\'">
+                    $row = $shop_result->fetch_all(MYSQLI_ASSOC);
+
+                    foreach ($row as $rows) {
+
+                        echo '
+
+                         
+                        <!-- Changes -->
+                        <div class="shop" onclick="window.location.href = \'shop_interface.php?user_id=' . $rows["id"] . '\'">
                             <div class="shop_logo">
                                 <img src="retrieve_img_shop.php?user_id=' . $rows["username"] . '" alt="logo">
                             </div>
@@ -366,11 +414,17 @@ if (isset($_SESSION["username"])) {
                             </div>
                         </div>
                         
+                        ';
 
-            
+                    }
+
+
+                 }
+                
+                        
+                ?>
 
                     </div>
-                    
                 </div>
             </div>
             <div class="content_bottom">
@@ -379,28 +433,66 @@ if (isset($_SESSION["username"])) {
                         <h2>Foods Recommendation</h2>
                     </div>
 
-                    <div class="products_foods">
+                    <div class="products_foods" id="content_load">
 
-                        <!-- Changes -->
-                        <div class="products_foods_ads">
-                            <div class="products_foods_ads_image">
-                                <img src="images/images.png" alt="images">
-                            </div>
-                            <div class="products_foods_ads_info">
-                                <h3>Dumplings</h3>
-                                <p> 500 / <u>Shipping Included</u></p>
-                                <div class="products_foods_ads_info_funtion">
-                                <input type="hidden" class="PRID" name="productId" value=""><!-- Important -->
-                                <input type="hidden" class="products_name" value="Dumplings">
-                                <input type="hidden" class="org_price" value="500">
-                                <button class="buy">Add to Cart &#x2795;</button>
+                        <?php
+
+                            if ($product_result->num_rows > 0) {
+
+                                $product_row = $product_result->fetch_all(MYSQLI_ASSOC);
+                                
+                                foreach ($product_row as $product_rows) {
+
+                                    echo '
+                                    
+                                    <!-- Changes -->
+                            <div class="products_foods_ads">
+                                <div class="products_foods_ads_image">
+                                    <img src="product_img.php?user_id=' . $product_rows["id"] . '" alt="images">
+                                </div>
+                                <div class="products_foods_ads_info">
+                                    <h3>' . $product_rows["product_name"] . '</h3>
+                                    <p> ' . $product_rows["prize"] . ' / <u>Shipping Included</u></p>
+                                    <div class="products_foods_ads_info_funtion">
+                                    <input type="hidden" class="PRID" name="productId" value="' . $product_rows["id"] . '"><!-- Important -->
+                                    <input type="hidden" class="products_name" value="' . $product_rows["product_name"] . '">
+                                    <input type="hidden" class="org_price" value="' . $product_rows["prize"] . '">
+                                    <button class="buy">Add to Cart &#x2795;</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        
+
+                                    ';
+
+                                }
+
+                            }
+                    ?>
+                        <?php
+                            // Prepare the statement to fetch the total number of products
+                            $total_query = $conn->prepare("SELECT COUNT(*) as total FROM products_view");
+                            $total_query->execute();
+                            $total_result = $total_query->get_result();
+                            $total_row = $total_result->fetch_assoc();
+                            $total_products = $total_row['total'];
+
+                            // Calculate the next starting point
+                            $next_start = $start + $limit;
+
+                            // Display Next button only if there are more products to load
+                            if ($next_start < $total_products) {
+                                echo '<div class="pagination">
+                                        <a href="user.php?start=' . $next_start . '">Next &raquo;</a>
+                                    </div>';
+                            } else {
+                                echo '<div class="pagination">
+                                <a>No Products Available</a>
+                                    </div>';
+                            }
+                        ?>
 
                     </div>
+                    
 
                 </div>
                 
@@ -413,6 +505,6 @@ if (isset($_SESSION["username"])) {
 
 </footer>
 <script src="script/animation3.js"></script>
-<script src="script/loading.js"></script>
+
 
 </html>

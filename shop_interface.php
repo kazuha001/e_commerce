@@ -1,3 +1,46 @@
+<?php
+include 'server.php';
+
+session_start();
+
+$limit = 20;  // Number of items per page
+$start = isset($_GET['start']) ? (int)$_GET['start'] : 0;
+
+$user_id = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
+
+if (isset($_SESSION["username"])) {
+
+$stmt = $conn->prepare("SELECT * FROM seller_shop WHERE id = ?");
+$stmt->bind_param("s", $user_id);
+$stmt->execute();
+$stmt_result = $stmt->get_result();
+
+$stmt2 = $conn->prepare("SELECT * FROM products_view WHERE seller_id = ? LIMIT ? OFFSET ?");
+$stmt2->bind_param("iii", $user_id, $limit, $start);
+$stmt2->execute();
+$stmt2_result = $stmt2->get_result();
+
+
+} else {
+
+    session_destroy();
+    echo '<script>
+                alert("Authentication Failed Session Destroy")
+                window.location.href = "login.html"
+            </script>';
+    sleep(2);
+
+    exit();
+
+}
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +53,10 @@
 
     <link rel="stylesheet" href="css/shop_interface.css">
 
+    <link rel="stylesheet" href="css/user.css">
+
+    <link rel="stylesheet" href="css/loading.css">
+
 </head>
 <body style="position: relative;">
     <div class="products_foods_popup" id="products_foods_popup">
@@ -19,7 +66,7 @@
         <div class="products_foods_popup_bottom">
             <div class="products_foods_popup_bottom_img">
                 
-                <img src="images/images.png" alt="">
+                <img id="img_change" src="" alt="images">
                 
                 <div>
                     <h2 id="products_name"></h2><h2 id="price"></h2>
@@ -50,15 +97,30 @@
         </div>
     </div>
     <div class="container">
-        <div class="hide_bg" id="hide_bg"></div>
-        <div class="header">
-            <div class="header_img_pp">
-                <img src="" alt="">
-            </div>
-            <div class="header_shop_name">
-                <h2>Shop Name</h2>
-            </div>
-        </div>
+    <div class="hide_bg" id="hide_bg"></div>
+            <?php
+            if ($stmt_result->num_rows > 0) {
+
+                $shop_acc = $stmt_result->fetch_assoc();
+
+                echo '
+                    <div class="header1">
+                         <div class="header1_img_pp">
+                        <img src="retrieve_img_shop.php?user_id=' . $shop_acc["username"] . '" alt="">
+                    </div>
+                    <div class="header1_shop_name">
+                        <h2>' . $shop_acc["shop_name"] . '</h2>
+                    </div>
+                    </div>
+                ';
+
+            }
+
+           
+            ?>
+
+                   
+        
         <div class="content">
             <div class="content_overview">
                 <div>
@@ -67,23 +129,66 @@
                 </div>
             </div>
             <div class="content_product">
+                <?php
 
-                <!-- Changes -->
-                <div class="products_foods_ads">
-                    <div class="products_foods_ads_image">
-                        <img src="images/images.png" alt="images">
-                    </div>
-                    <div class="products_foods_ads_info">
-                        <h3>Dumplings</h3>
-                        <p> 500 / <u>Shipping Included</u></p>
-                        <div class="products_foods_ads_info_funtion">
-                        <input type="hidden" class="PRID" name="productId" value=""><!-- Important -->
-                        <input type="hidden" class="products_name" value="Dumplings">
-                        <input type="hidden" class="org_price" value="500">
-                        <button class="buy">Add to Cart &#x2795;</button>
-                        </div>
-                    </div>
-                </div>
+                    if ($stmt2_result->num_rows > 0) {
+
+                        $row = $stmt2_result->fetch_all(MYSQLI_ASSOC);
+
+                        foreach ($row as $rows) {
+
+                            echo '
+                            
+                             <!-- Changes -->
+                                <div class="products_foods_ads">
+                                    <div class="products_foods_ads_image">
+                                        <img src="product_img.php?user_id=' . $rows["id"] . '" alt="images">
+                                    </div>
+                                    <div class="products_foods_ads_info">
+                                        <h3>' . $rows["product_name"] . '</h3>
+                                        <p> ' . $rows["prize"] . ' / <u>Shipping Included</u></p>
+                                        <div class="products_foods_ads_info_funtion">
+                                        <input type="hidden" class="PRID" name="productId" value="' . $rows["id"] . '"><!-- Important -->
+                                        <input type="hidden" class="products_name" value="' . $rows["product_name"] . '">
+                                        <input type="hidden" class="org_price" value="' . $rows["prize"] . '">
+                                        <button class="buy">Add to Cart &#x2795;</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+                            ';
+
+                        }
+
+                    }
+
+                ?>
+
+                        <?php
+                            // Prepare the statement to fetch the total number of products
+                            $total_query = $conn->prepare("SELECT COUNT(*) as total FROM products_view WHERE seller_id = ?");
+                            $total_query->bind_param("i", $user_id);
+                            $total_query->execute();
+                            $total_result = $total_query->get_result();
+                            $total_row = $total_result->fetch_assoc();
+                            $total_products = $total_row['total'];
+
+                            // Calculate the next starting point
+                            $next_start = $start + $limit;
+
+                            // Display Next button only if there are more products to load
+                            if ($next_start < $total_products) {
+                                echo '<div class="pagination">
+                                        <a href="shop_interface.php?user_id=' . $user_id . '&start=' . $next_start . '">Next &raquo;</a>
+                                    </div>';
+                            } else {
+                                echo '<div class="pagination">
+                                <a>No Products Available</a>
+                                    </div>';
+                            }
+                        ?>
+               
 
             </div>
 
