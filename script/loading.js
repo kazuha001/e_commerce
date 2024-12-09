@@ -1,36 +1,45 @@
-
-let start = 10;  // Start at the 10th item (because you already loaded the first 10)
-const content = document.getElementById('content');
-const loading = document.getElementById('loading');
+let isLoading = false;
+const content = document.getElementById('content_load');
+const loading = document.getElementById('load');
 
 // Function to check if the user has scrolled to the bottom
 function checkScroll() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-            loadMoreContent();
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 700) {
+        loadMoreContent();
     }
 }
 
-// Function to load more content
+// Function to load more content using AJAX
 function loadMoreContent() {
-        loading.style.display = 'block';  // Show loading text
+    if (isLoading) return; // Prevent duplicate requests
+    isLoading = true;
+    loading.style.display = 'flex';  // Show loading indicator
 
-        // Use AJAX to fetch more content
-    fetch(`user.php?start=${start}`)
+    // Use AJAX to fetch content from the server (session is handled on the server)
+    fetch('user_load.php')  // Call the new PHP file to load more content
         .then(response => response.text())
         .then(data => {
-                content.innerHTML += data;  // Append the new divs to the existing content
-                start += 10;  // Increment the starting point for the next batch
-                loading.style.display = 'none';  // Hide loading text
-            })
-            .catch(error => {
-                console.error('Error loading more content:', error);
+            if (data === "No more content to load.") {
                 loading.style.display = 'none';
-            });
-    }
+                alert("No more products available.");
+                return;  // Stop further requests when no more content
+            }
 
-    // Detect scroll events
-    window.addEventListener('scroll', checkScroll);
+            content.innerHTML += data;  // Append new content to existing content
+            loading.style.display = 'none';  // Hide loading indicator
+            isLoading = false;
+        })
+        .catch(error => {
+            console.error('Error loading more content:', error);
+            loading.style.display = 'none';
+            isLoading = false;
+        });
+}
 
-    // Initial content loading
-    loadMoreContent();
+// Detect scroll events to trigger loading more content
+window.addEventListener('scroll', checkScroll);
 
+// Initial content loading
+document.addEventListener('DOMContentLoaded', () => {
+    loadMoreContent();  // Load initial content when the page is loaded
+});

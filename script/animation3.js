@@ -472,6 +472,8 @@ function burger_function() {
 
     var PRIDrecieve = document.getElementById("PRID")
 
+    var img_changeId = document.getElementById("img_change")
+
     buyId.forEach(function (button) {
         button.addEventListener("click", function() {
 
@@ -494,6 +496,8 @@ function burger_function() {
             products_foods_popupId.style.display = "flex"
 
             PRIDrecieve.innerText = PRIDresult
+
+            img_changeId.src = "product_img.php?user_id=" + PRIDresult
 
             setTimeout(() => {
                 products_foods_popupId.style.right = "0"
