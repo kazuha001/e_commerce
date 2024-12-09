@@ -154,6 +154,7 @@
     justify-content: space-around;
     align-items: center;
     cursor: pointer;
+    background-color: #d9d9d9;
 }
 
 .shop_logo {
@@ -668,7 +669,7 @@
         width: 0;
     }
     .header_right {
-        width: 310px;
+        width: 210px;
         margin-right: 10px  ;
     }
     .title h2 {
@@ -687,13 +688,13 @@
     .overlay_burger {
         display: flex;
         width: 30px;
-    }
+    }   
     .search form {
-        width: 350px;
+        width: 100%;
     }
     .search input {
         margin: 0;
-        width: 170px;
+        width: 120px;
     }
     .products_foods_popup {
         width: 100%;
