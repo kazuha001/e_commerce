@@ -1,31 +1,23 @@
-
 <?php
-
+include 'server.php';
 session_start();
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "e_commerce";
+if (isset($_SESSION["username"])) {
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-if (isset($_SESSION['username'])) {
+    $session = $_SESSION["username"];
+
     
-    $username = $_SESSION["username"];
 
-    $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+} else {
 
-    if ($result->num_rows > 0) {
+}
 
-        $user = $result->fetch_assoc();
 
-    echo '
-    
-    <!DOCTYPE html>
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -216,16 +208,19 @@ if (isset($_SESSION['username'])) {
             
             <div class="header_right" >
                 
+                
                 <div class="search" id="header_prevention">
                     <form action="" method="POST">
                         <input type="search" placeholder="What are you looking for?" id="search" name="search">
                     </form>
                 </div>
                 <div class="user_information" id="user_information">
-                    <div>
-                        <div class="overlay_1"><img src="retrieve_img.php?user_id=' . $user['id'] . '" alt="PP"></div><!-- Overlay -->
-                        <p>' . $user["username"] . '</p>
-                    </div>
+                    
+                        <div>
+                                    <div class="overlay_1"><img src="retrieve_img.php?user_id=' . $user['id'] . '" alt="PP"></div><!-- Overlay -->
+                                <p>' . $user["username"] . '</p>
+                        </div>
+
                     <div class="user_information_overlay" id="user_information_overlay">
                         <form action="user_pp.php"><button><h4>My Profile</h4></button></form>
                         <form action="" method=""><button><h4>My Carts</h4></button></form>
@@ -352,48 +347,28 @@ if (isset($_SESSION['username'])) {
                 </div>
                 
         </div>
-        
-
-       
-
-    ';
-
-    
-} else {
-
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
-
-    }
-}
-
-?>
- 
- <div class="content" id="content">
+        <div class="content" id="content">
             <div class="content_top">
                 <div class="content_top_reconds">
                     <div class="content_top_reconds_title">
                         <h2>Popular Shop</h2>
                     </div>
-                    <div class="content_top_reconds_shop">
+            <div class="content_top_reconds_shop">
 
-                        <!-- Changes -->
-                        <div class="shop">
+
+                 <!-- Changes -->
+                        <div class="shop" onclick="window.location.href = \'shop_interface.php?user_id=' . $rows["username"] . '\'">
                             <div class="shop_logo">
-                                <img src="images/images.png" alt="logo">
+                                <img src="retrieve_img_shop.php?user_id=' . $rows["username"] . '" alt="logo">
                             </div>
                             <div class="shop_name">
-                                <p>Cordys Foods Shop</p>
+                                <p>' . $rows["shop_name"] . '</p>
                             </div>
                         </div>
                         
-                        
-                        
+
+            
+
                     </div>
                     
                 </div>
@@ -438,4 +413,6 @@ if (isset($_SESSION['username'])) {
 
 </footer>
 <script src="script/animation3.js"></script>
+<script src="script/loading.js"></script>
+
 </html>

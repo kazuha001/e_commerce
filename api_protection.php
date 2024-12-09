@@ -1,15 +1,8 @@
 <?php
-
+include 'server.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "e_commerce";
-    
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 if(isset($_SESSION["username"])) {
 

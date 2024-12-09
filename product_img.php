@@ -1,11 +1,6 @@
 <?php
 // Connect to your database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "e_commerce";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+include 'server.php';
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

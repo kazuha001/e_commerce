@@ -1,15 +1,8 @@
 <?php
-
+include 'server.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "e_commerce";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
     if (isset($_SESSION["username"])) {
 
@@ -85,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </tr>
                                     </tbody>
                                 </table>
-                                
+                                <input type="hidden" name="update_id" id="update_id" value="' . $row["id"] . '" required>
                             </form>
                         </div>
                         
@@ -125,7 +118,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 } else {
 
-    echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>';
+    echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>
+    <script>
+        window.location.href = "sell_products.php"
+        </script>';
 
 }
 

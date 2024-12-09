@@ -1,15 +1,8 @@
 <?php
-
+include 'server.php';
 session_start();
 
 if (isset($_SESSION["username"])) {
-
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "e_commerce";
-    
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
     $username = $_SESSION["username"];
 

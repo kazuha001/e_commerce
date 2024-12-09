@@ -1,5 +1,5 @@
 <?php
-
+include 'server.php';
 header('Content-Type: application/json');
 
 ini_set('display_errors', 1);
@@ -9,13 +9,6 @@ error_reporting(E_ALL);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "e_commerce";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 $fname_id = $_POST["fname"];
 $gender_id = $_POST["gender"];
