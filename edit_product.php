@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     </footer>
                 
-    <script src="script/shop_graph.js"></script>
+    <script src="script/product_update.js"></script>
     
     </html>
                     ';
