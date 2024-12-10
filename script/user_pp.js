@@ -11,3 +11,9 @@ function seller() {
     window.location.href = "seller_shop.php"
 
 }
+
+function carts() {
+
+    window.location.href = "carts.php"
+
+}

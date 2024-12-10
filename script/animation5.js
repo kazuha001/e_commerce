@@ -24,6 +24,12 @@ var hide_bgId = document.getElementById("hide_bg")
 
 var PRIDrecieve = document.getElementById("PRID")
 
+var img_changeId = document.getElementById("img_change")
+
+var tokenId = document.getElementById("token")
+
+var sellerId = document.getElementById("seller")
+
 buyId.forEach(function (button) {
     button.addEventListener("click", function() {
 
@@ -35,6 +41,16 @@ buyId.forEach(function (button) {
 
         var PRIDresult = parent.querySelector(".PRID").value
 
+        var token = parent.querySelector(".token").value
+
+        var img_identify = parent.querySelector(".img_identify").value
+
+        var seller = parent.querySelector(".seller").value
+
+        sellerId.value = seller
+
+        tokenId.value = token
+
         products_nameHTMLId.innerText = products_nameId
 
         total_resultId.innerText = org_priceId
@@ -45,7 +61,9 @@ buyId.forEach(function (button) {
 
         products_foods_popupId.style.display = "flex"
 
-        PRIDrecieve.innerText = PRIDresult
+        PRIDrecieve.value = PRIDresult
+
+        img_changeId.src = "product_img.php?user_id=" + img_identify
 
         setTimeout(() => {
             products_foods_popupId.style.right = "0"

@@ -7,7 +7,7 @@ function carts() {
 
     navigatorId.style.left = "0"
 
-    Iframe_manipulatedId.src = "carts_through.html"
+    Iframe_manipulatedId.src = "carts_through.php"
 
 }
 
@@ -19,7 +19,7 @@ function ToPay() {
 
     navigatorId.style.left = "120px"
 
-    Iframe_manipulatedId.src = "ToPay.html"
+    Iframe_manipulatedId.src = "ToPay.php"
 
 }
 
@@ -31,7 +31,7 @@ function ToRecieve() {
 
     navigatorId.style.left = "240px"
 
-    Iframe_manipulatedId.src = "ToRecieve.html"
+    Iframe_manipulatedId.src = "ToRecieve.php"
 
 }
 
@@ -43,7 +43,7 @@ function ReturnRefund() {
 
     navigatorId.style.left = "360px"
 
-    Iframe_manipulatedId.src = "ReturnRefund.html"
+    Iframe_manipulatedId.src = "ReturnRefund.php"
 
 }
 
@@ -55,7 +55,7 @@ function Complete() {
 
     navigatorId.style.left = "480px"
 
-    Iframe_manipulatedId.src = "complete.html"
+    Iframe_manipulatedId.src = "complete.php"
 
 }
 
@@ -67,6 +67,13 @@ function Cancelled() {
 
     navigatorId.style.left = "600px"
 
-    Iframe_manipulatedId.src = "cancel.html"
+    Iframe_manipulatedId.src = "cancel.php"
+
+}
+
+function back() {
+
+    window.location.href = "user.php"
+
 
 }

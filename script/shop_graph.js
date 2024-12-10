@@ -84,6 +84,7 @@ document.getElementById("myform").addEventListener("submit", function(event) {
             }
         })
         .catch(error => {
-            alert("Server Down To Many Request")
+            alert("Server Down To Many Request Please Refresh the webpage")
+            window.location.reload()
         })
 })
