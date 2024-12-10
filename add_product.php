@@ -1,9 +1,6 @@
 <?php
 include 'server.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+include 'error.php';
 
 session_start();
 
@@ -23,7 +20,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $accounts = $result->fetch_assoc();
 
             $product_name = $_POST["product_name"];
+
+            $product_uppercase = ucwords($product_name);
+
+            include 'encrypt.php';
+
+            include 'key.php';
+
             $prize = $_POST["prize"];
+            
+            $encryptedPrize = encryptPrize($prize, $key);
 
             if (isset($_FILES['img']) && $_FILES['img']['error'] === 0) {
 
@@ -41,13 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'message' => ' Added Succesfully'
                 ];
                 echo json_encode($response);
-
-                $stmt = $conn->prepare("INSERT INTO products_view (seller_id, product_name, prize, img) VALUES (?, ?, ?, ?)");
-                $stmt->bind_param("isss", $accounts["id"], $product_name, $prize, $img_id);
-            
-                $stmt->execute();
-
-                    
                 
 
             }  else {
@@ -58,33 +57,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
                 
                 echo json_encode($response);
-
-                exit();
-                session_start();
-
-                
-
+                $img_id = "";
             }
 
+            $stmt = $conn->prepare("INSERT INTO products_view (seller_id, product_name, prize, img) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("isss", $accounts["id"], $product_uppercase, $encryptedPrize, $img_id);
+            
+            $stmt->execute();
             
 
         }else {
 
-            echo '<script>
-            alert("Authentication Failed Session Destroy 2")
-            
-            </script>';
-            sleep(2);
+            include 'session_destroy.php';
         }
 
 
     } else {
 
-        echo '<script>
-        alert("Authentication Failed Session Destroy 3")
-        
-        </script>';
-        sleep(2);
+        include 'session_destroy.php';
     }
 
 

@@ -1,3 +1,27 @@
+<?php
+
+include 'server.php';
+
+include 'error.php';
+
+session_start();
+
+if (isset($_SESSION["username"])) {
+
+    $session = $_SESSION["username"];
+
+    $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+    $check->bind_param("s", $session);
+    $check->execute();
+    $check_result = $check->get_result();
+
+} else {
+
+    include 'session_destroy.php';
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -87,14 +87,7 @@ if(isset($_SESSION["username"])) {
         
     } else {
         
-        echo '<script>
-                    alert("Authentication Failed Session Destroy")
-                    window.location.href = "login.html"
-                </script>';
-        sleep(2);
-        session_destroy();
-    
-        exit();
+        include 'session_destroy.php';
 
     }
 

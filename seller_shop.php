@@ -120,41 +120,25 @@ if (isset($_SESSION["username"])) {
         $conn->close();
 
         } else {
+            
             echo '<script>
-                        alert("Please Upgrade Your Acc to Major to access shop")
+                        alert("Please Upgrade to Major to Access SHOP")
                         window.location.href = "user_pp.php"
                     </script>';
             sleep(2);
-        
-            exit();
-        
         }
           
 
 
     } else {
 
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+        include 'session_destroy.php';
 
     }
 
 
 } else {
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+    include 'session_destroy.php';
 }
 
 

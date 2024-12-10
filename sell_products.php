@@ -89,25 +89,29 @@ if (isset($_SESSION["username"])) {
             $table->execute();
             $table_result = $table->get_result();
 
+            include 'dencrypt.php';
+
+            include 'key.php';
+
             if ($table_result->num_rows > 0) {
 
                 $row = $table_result->fetch_all(MYSQLI_ASSOC);
 
                 foreach($row as $rows) {
-
+                    $decryptedPrize = decryptPrize($rows['prize'], $key);
                     echo '
                     <tr>
                         <td>' . $rows["id"] . '</td>
                         <td><img src="product_img.php?user_id=' . $rows["id"] . '" alt="Product Img" style="width: 90px; height: 90px; margin: 10px;"></td>
                         <td>' . $rows["product_name"] . '</td>
-                        <td>' . $rows["prize"] . '</td>
+                        <td>' . $decryptedPrize . '</td>
                         <td>' . $rows["current_time/date"] . '</td>
                         <td>
                             <form action="edit_product.php" method="POST">
                                 <input type="hidden" id="edit_id" name="edit_id" value="' . $rows["id"] . '">
                                 <button style="background-color: #0f0;">EDIT</button>
                             </form>
-                            <form action="" method="POST">
+                            <form action="delete_product.php" method="POST">
                                 <input type="hidden" id="delete_id" name="delete_id" value="' . $rows["id"] . '">
                                 <button style="background-color: #f00;">DELETE</button>
                             </form>
@@ -168,13 +172,8 @@ $stmt3->close();
 $conn->close();
 
 } else {
-    echo '<script>
-                alert("Please Upgrade Your Acc to Major to access shop")
-                window.location.href = "user_pp.php"
-            </script>';
-    sleep(2);
 
-    exit();
+    include 'session_destroy.php';
 
 }
   
@@ -182,27 +181,15 @@ $conn->close();
 
 } else {
 
-session_destroy();
-echo '<script>
-        alert("Authentication Failed Session Destroy")
-        window.location.href = "login.html"
-    </script>';
-sleep(2);
-
-exit();
+include 'session_destroy.php';
 
 }
 
 
 } else {
-session_destroy();
-echo '<script>
-        alert("Authentication Failed Session Destroy")
-        window.location.href = "login.html"
-    </script>';
-sleep(2);
 
-exit();
+include 'session_destroy.php';
+
 }
 
 

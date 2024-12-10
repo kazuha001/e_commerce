@@ -19,6 +19,10 @@ $address_id = $_POST["address"];
 $username_id = $_POST["username"];
 $passwd_id = $_POST["c_password1"];
 
+$cleanName = preg_replace('/\s+/', ' ', trim($fname_id));
+
+$fname_id_uc = ucwords($cleanName);
+
 $acc_lv_id = "Minor";
 
 $passwd_hash = password_hash($passwd_id, PASSWORD_DEFAULT);
@@ -44,7 +48,7 @@ $stmt = $conn->prepare("INSERT INTO user_accounts (fname, gender, mnumber, birth
 email, address, username, passwd_hash, acc_lv)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssssssss", 
-$fname_id, $gender_id, $mnumber_id, $birthdate_id, 
+$fname_id_uc, $gender_id, $mnumber_id, $birthdate_id, 
 $email_id, $address_id, $username_id, $passwd_hash, $acc_lv_id);
    
    

@@ -1,3 +1,30 @@
+<?php
+
+include 'server.php';
+
+if (isset($_SESSION["username"])) {
+
+    $session = $_SESSION["username"];
+
+    $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+    $check->bind_param("s", $session);
+    $check->execute();
+    $check_result = $check->get_result();
+
+    if ($check_result->num_rows > 0) {
+
+        $accounts = $check_result->fetch_assoc();
+        
+    } else {
+
+        include 'session_destroy.php';
+
+    }
+
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +41,7 @@
     <div class="container">
         <div class="header">
             <div class="header_top">
-                <button> &lt; Back</button>
+                <button onclick="back()"> &lt; Back</button>
             </div>
             <div class="header_bottom">
                 <div>
@@ -31,7 +58,7 @@
         </div>
         <div class="iframe_area">
             <div>
-            <iframe id="Iframe_manipulated" src="carts_through.html" frameborder="0" style="width: 100%; height: 890px; margin: 10px;"></iframe>
+            <iframe id="Iframe_manipulated" src="carts_through.php" frameborder="0" style="width: 100%; height: 890px; margin: 10px;"></iframe>
             </div>
         </div>
     </div>

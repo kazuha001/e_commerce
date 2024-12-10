@@ -29,14 +29,7 @@ if (isset($_SESSION["username"])) {
 
 } else {
 
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+    include 'session_destroy.php';
     
 
 }
@@ -75,7 +68,7 @@ if (isset($_SESSION["username"])) {
                     <h2 id="products_name"></h2><h2 id="price"></h2>
                 </div>
             </div>
-            <form action="" method="POST" id="resetf0">
+            <form action="encrypting_transaction.php" method="POST" id="resetf0">
                 
             <div class="products_foods_popup_bottom_quantity_function">
                 <div class="products_foods_popup_bottom_quantity_function_elements1">
@@ -85,15 +78,16 @@ if (isset($_SESSION["username"])) {
                     <button onclick="plus_qty()" type="button"><p>&plus;</p></button>
                 </div>
                 <div class="products_foods_popup_bottom_quantity_function_elements2">
-                    
+                        <input type="hidden" name="org_prize" id="org_price2" value="">
+                        <input type="hidden" name="qty" id="qty" value="1" required>
+                        <input type="hidden" name="token" id="token" value="">
+                        <input type="hidden" id="total" value="">
+                        <input type="hidden" id="seller" name="seller" value="">
+                        <!-- Important -->
+                        <input type="hidden" id="PRID" name="PRID" value="" required>
                     <button type="submit">Add to Cart - &nbsp;<p id="total_result"></p></button>
                 </div>
-                <input type="hidden" id="org_price2" value="">
-                <input type="hidden" id="qty" value="1" required>
-                <input type="hidden" id="total" value="">
-
-                <!-- Important -->
-                <input type="hidden" id="PRID" name="productId" value="" required>
+                
 
             </div>
             </form>
@@ -261,7 +255,7 @@ if (isset($_SESSION["username"])) {
                     ?>
                     <div class="user_information_overlay" id="user_information_overlay">
                         <form action="user_pp.php"><button><h4>My Profile</h4></button></form>
-                        <form action="" method=""><button><h4>My Carts</h4></button></form>
+                        <form action="carts.php"><button><h4>My Carts</h4></button></form>
                         <form action="logout.php" method=""><button><h4>Log out</h4></button></form>
                     </div>
                 </div>
@@ -437,11 +431,23 @@ if (isset($_SESSION["username"])) {
 
                         <?php
 
+                            include 'dencrypt.php';
+
+                            include 'encrypt.php';
+
+                            include 'key.php';
+
                             if ($product_result->num_rows > 0) {
 
                                 $product_row = $product_result->fetch_all(MYSQLI_ASSOC);
                                 
                                 foreach ($product_row as $product_rows) {
+
+                                    $decryptedPrize = decryptPrize($product_rows['prize'], $key);
+
+                                    $encryptedId = encryptPrize($product_rows["id"], $key);
+
+                                    $encryptedSellerId = encryptPrize($product_rows["seller_id"], $key);
 
                                     echo '
                                     
@@ -452,11 +458,14 @@ if (isset($_SESSION["username"])) {
                                 </div>
                                 <div class="products_foods_ads_info">
                                     <h3>' . $product_rows["product_name"] . '</h3>
-                                    <p> ' . $product_rows["prize"] . ' / <u>Shipping Included</u></p>
+                                    <p> ' . $decryptedPrize . ' / <u>Shipping Included</u></p>
                                     <div class="products_foods_ads_info_funtion">
-                                    <input type="hidden" class="PRID" name="productId" value="' . $product_rows["id"] . '"><!-- Important -->
+                                    <input type="hidden" class="PRID" name="productId" value="' . $encryptedId . '"><!-- Important -->
+                                    <input type="hidden" class="seller" name="productId" value="' . $encryptedSellerId . '">
+                                    <input type="hidden" class="img_identify" name="productId" value="' . $product_rows["id"] . '">
                                     <input type="hidden" class="products_name" value="' . $product_rows["product_name"] . '">
-                                    <input type="hidden" class="org_price" value="' . $product_rows["prize"] . '">
+                                    <input type="hidden" class="org_price" value="' . $decryptedPrize . '">
+                                    <input type="hidden" class="token" value="' . $product_rows["prize"] . '">
                                     <button class="buy">Add to Cart &#x2795;</button>
                                     </div>
                                 </div>
@@ -482,11 +491,11 @@ if (isset($_SESSION["username"])) {
                             // Display Next button only if there are more products to load
                             if ($next_start < $total_products) {
                                 echo '<div class="pagination">
-                                        <a href="user.php?start=' . $next_start . '">Next &raquo;</a>
+                                        <a href="user.php?start=' . $next_start . '">Load More</a>
                                     </div>';
                             } else {
                                 echo '<div class="pagination">
-                                <a>No Products Available</a>
+                                <p>No Data</p>
                                     </div>';
                             }
                         ?>

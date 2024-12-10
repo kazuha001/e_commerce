@@ -1,0 +1,14 @@
+ALTER TABLE trans
+ADD CONSTRAINT fk_user_id
+FOREIGN KEY (user_id)
+REFERENCES user_accounts(id)
+ON UPDATE CASCADE;
+
+ALTER TABLE transaction1
+DROP FOREIGN KEY fk_user6_id
+
+ALTER TABLE trans
+DROP FOREIGN KEY fk_prize_id;
+
+SHOW CREATE TABLE transaction1;
+

@@ -63,35 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }else {
 
-            session_destroy();
-            echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-            sleep(2);
+            include 'session_destroy.php';
 
         }
 
     } else {
 
-        session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
+        include 'session_destroy.php';
     }
     
     
 } else {
 
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
+    include 'session_destroy.php';
 
 }
 

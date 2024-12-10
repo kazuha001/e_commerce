@@ -69,7 +69,7 @@ $result = $stmt->get_result();
             sleep(3);
             session_start();
 
-            $_SESSION["username"] = $accounts["username"];
+            $_SESSION["id"] = $accounts["id"];
 
             header("Location: 2FA.php");
             exit();

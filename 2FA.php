@@ -3,14 +3,33 @@ include 'server.php';
 
 session_start();
 
-if (isset($_SESSION["username"])) {
+if (isset($_SESSION["id"])) {
 
-    $username = $_SESSION["username"];
+    $username = $_SESSION["id"];
 
-    $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE id = ?");
+    $stmt->bind_param("i", $username);
     $stmt->execute();
     $result = $stmt->get_result();
+
+    $checkquery = $conn->prepare("SELECT COUNT(*) FROM api_code WHERE user_id = ?");
+    $checkquery->bind_param("i", $username);
+    $checkquery->execute();
+    $checkquery->bind_result($count);
+    $checkquery->fetch();
+
+    if ($count > 1) {
+
+        echo '
+            <script>
+                alert("Too Many Request Contact the Admin for Consultation")
+                window.location.href = "back.php"
+            </script>
+        ';
+        exit();
+    } 
+
+    $checkquery->close();
 
     if ($result->num_rows > 0) {
 
@@ -54,7 +73,7 @@ if (isset($_SESSION["username"])) {
                     <div class="log_in_form_button">
                         <div class="log_in_form_button_overlay">
                             <div class="overlay_14"></div><!-- Overlay -->
-                            <button type="button" onclick="fback()">Back</button>
+                            <button type="button" onclick="fback1()">Back</button>
                         </div>
                         <div class="log_in_form_button_overlay">
                             <div class="overlay_15"></div><!-- Overlay -->
@@ -79,15 +98,7 @@ if (isset($_SESSION["username"])) {
 </html>';
 } else {
     
-    session_destroy();
-
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+    include 'session_destroy.php';
 
     }
 

@@ -19,6 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $edit_id = $_POST["edit_id"];
 
+            include 'dencrypt.php';
+
+            include 'key.php';
+
             $table = $conn->prepare("SELECT * FROM products_view WHERE id = ?");
             $table->bind_param("i", $edit_id);
             $table->execute();
@@ -29,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
 
                 while ($row = $table_result->fetch_assoc()) {
+
+                    $decryptedToken = decryptPrize($row['prize'], $key);
 
                     echo '
                         <!DOCTYPE html>
@@ -73,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <td><img id="upImg" src="product_img.php?user_id=' . $row["id"] . '" alt="Product Img" style="width: 90px; height: 90px; margin: 10px;"></td>
                                             <td><input id="uploadImg" type="file" name="img" accept="image/*" style="width: 50%; color: #fff;"></td>
                                             <td><input type="text" name="product_name" id="product_name" placeholder="Product Name" value="' . $row["product_name"] . '" required></td>
-                                            <td><input type="number" name="prize" id="prize" placeholder="Input Prize" value="' . $row["prize"] . '" required></td>
+                                            <td><input type="number" name="prize" id="prize" placeholder="Input Prize" value="' . $decryptedToken . '" required></td>
                                             <td><button style="background-color: #0f0;">Update</button></td>
                                         </tr>
                                     </tbody>
@@ -106,11 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
 
-        session_destroy();
-        echo '<script>
-        alert("Invalid Request SESSION DESTROY")
-        window.location.href = "logout.php"
-        </script>';
+        include 'session_destroy.php';
     
 
     }

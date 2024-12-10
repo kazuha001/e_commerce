@@ -1,8 +1,6 @@
 <?php
 include 'server.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'error.php';
 
 session_start();
 
@@ -28,10 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($shop_result->num_rows > 0) {
 
+                $shop_acc = $shop_result->fetch_assoc();
+
                 $product_id = $_POST["update_id"];
 
-                $check_product = $conn->prepare("SELECT * FROM products_view WHERE id = ?");
-                $check_product->bind_param("i", $product_id);
+                $check_product = $conn->prepare("SELECT * FROM products_view WHERE id = ? AND seller_id = ?");
+                $check_product->bind_param("ii", $product_id, $shop_acc["id"]);
                 $check_product->execute();
                 $check_product_result = $check_product->get_result();
 
@@ -64,8 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         'message' => ' Updated Succesfully'
                     ];
 
+                    include 'encrypt.php';
+
+                    include 'key.php';
+
+                    $encryptedPrize = encryptPrize($prize, $key);
+
+
                     $stmt = $conn->prepare("UPDATE products_view SET product_name = ?, prize = ?, img = ? WHERE id = ?");
-                    $stmt->bind_param("sssi", $product_name, $prize, $img_id, $result["id"]);
+                    $stmt->bind_param("sssi", $product_name, $encryptedPrize, $img_id, $result["id"]);
                     $stmt->execute();
 
                     
@@ -82,32 +89,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             } else {
 
-                session_destroy();
-                echo '<script>
-                alert("Invalid Request SESSION DESTROY")
-                window.location.href = "logout.php"
-                </script>';
+                include 'session_destroy.php';
 
             }
 
 
         } else {
 
-            session_destroy();
-            echo '<script>
-            alert("Invalid Request SESSION DESTROY")
-            window.location.href = "logout.php"
-            </script>';
+            include 'session_destroy.php';
 
         }
 
     } else {
 
-        session_destroy();
-        echo '<script>
-        alert("Invalid Request SESSION DESTROY")
-        window.location.href = "logout.php"
-        </script>';
+        include 'session_destroy.php';
     
     }
 

@@ -23,14 +23,7 @@ $stmt2_result = $stmt2->get_result();
 
 } else {
 
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+    include 'session_destroy.php';
 
 }
 
@@ -72,7 +65,7 @@ $stmt2_result = $stmt2->get_result();
                     <h2 id="products_name"></h2><h2 id="price"></h2>
                 </div>
             </div>
-            <form action="" method="POST" id="resetf0">
+            <form action="encrypting_transaction.php" method="POST" id="resetf0">
                 
             <div class="products_foods_popup_bottom_quantity_function">
                 <div class="products_foods_popup_bottom_quantity_function_elements1">
@@ -85,10 +78,11 @@ $stmt2_result = $stmt2->get_result();
                     
                     <button type="submit">Add to Cart - &nbsp;<p id="total_result"></p></button>
                 </div>
-                <input type="hidden" id="org_price2" value="">
-                <input type="hidden" id="qty" value="1" required>
+                <input type="hidden" name="org_prize" id="org_price2" value="">
+                <input type="hidden" name="qty" id="qty" value="1" required>
+                <input type="hidden" name="token" id="token" value="">
                 <input type="hidden" id="total" value="">
-
+                <input type="hidden" id="seller" name="seller" value="">
                 <!-- Important -->
                 <input type="hidden" id="PRID" name="productId" value="" required>
 
@@ -110,6 +104,7 @@ $stmt2_result = $stmt2->get_result();
                     </div>
                     <div class="header1_shop_name">
                         <h2>' . $shop_acc["shop_name"] . '</h2>
+                        <h2><br>Address: ' . $shop_acc["address"] . '</h2>
                     </div>
                     </div>
                 ';
@@ -133,9 +128,21 @@ $stmt2_result = $stmt2->get_result();
 
                     if ($stmt2_result->num_rows > 0) {
 
+                        include 'dencrypt.php';
+
+                        include 'encrypt.php';
+
+                        include 'key.php';
+
                         $row = $stmt2_result->fetch_all(MYSQLI_ASSOC);
 
                         foreach ($row as $rows) {
+
+                            $decryptedPrize = decryptPrize($rows['prize'], $key);
+
+                            $encryptedId = encryptPrize($rows["id"], $key);
+
+                            $encryptedSellerId = encryptPrize($rows["seller_id"], $key);
 
                             echo '
                             
@@ -146,11 +153,14 @@ $stmt2_result = $stmt2->get_result();
                                     </div>
                                     <div class="products_foods_ads_info">
                                         <h3>' . $rows["product_name"] . '</h3>
-                                        <p> ' . $rows["prize"] . ' / <u>Shipping Included</u></p>
+                                        <p> ' . $decryptedPrize . ' / <u>Shipping Included</u></p>
                                         <div class="products_foods_ads_info_funtion">
-                                        <input type="hidden" class="PRID" name="productId" value="' . $rows["id"] . '"><!-- Important -->
+                                        <input type="hidden" class="PRID" name="productId" value="' . $encryptedId . '"><!-- Important -->
+                                        <input type="hidden" class="seller" name="productId" value="' . $encryptedSellerId . '">
+                                        <input type="hidden" class="img_identify" name="productId" value="' . $rows["id"] . '">
                                         <input type="hidden" class="products_name" value="' . $rows["product_name"] . '">
-                                        <input type="hidden" class="org_price" value="' . $rows["prize"] . '">
+                                        <input type="hidden" class="org_price" value="' . $decryptedPrize . '">
+                                        <input type="hidden" class="token" value="' . $rows["prize"] . '">
                                         <button class="buy">Add to Cart &#x2795;</button>
                                         </div>
                                     </div>
@@ -180,7 +190,7 @@ $stmt2_result = $stmt2->get_result();
                             // Display Next button only if there are more products to load
                             if ($next_start < $total_products) {
                                 echo '<div class="pagination">
-                                        <a href="shop_interface.php?user_id=' . $user_id . '&start=' . $next_start . '">Next &raquo;</a>
+                                        <a href="shop_interface.php?user_id=' . $user_id . '&start=' . $next_start . '">Load More</a>
                                     </div>';
                             } else {
                                 echo '<div class="pagination">

@@ -1,18 +1,25 @@
 <?php
+
+
+
 include 'server.php';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 session_start();
 
-if(isset($_SESSION["username"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+if(isset($_SESSION["id"])) {
 
     $request_code_id = $_POST["code"];
-    $username = $_SESSION["username"];
+    $username = $_SESSION["id"];
 
-    $stmt = $conn->prepare("SELECT * FROM api_code WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt = $conn->prepare("SELECT * FROM api_code WHERE user_id = ?");
+    $stmt->bind_param("i", $username);
     $stmt->execute();
     $result = $stmt->get_result();
+
+    
 
     if ($result->num_rows > 0) {
 
@@ -20,50 +27,55 @@ if(isset($_SESSION["username"])) {
 
         if ($request_code_id == $accounts["code"]) {
             
+            $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+            $check->bind_param("s", $accounts["username"]);
+            $check->execute();
+            $check_result = $check->get_result();
 
-            $destroy_api = $conn->prepare("DELETE FROM api_code WHERE id = ?");
-            $destroy_api->bind_param("i", $accounts["id"]);
-            $destroy_api->execute();
-            session_start();
-            session_destroy();
 
-            session_start();
+            if ($check_result->num_rows > 0) {
 
-            $_SESSION["username"] = $accounts["username"];
-            sleep(5);
-            header("Location: user.php");
-            exit();
+                $check_acc = $check_result->fetch_assoc();
+
+                session_start();
+
+                $_SESSION["username"] = $check_acc["username"];
+                
+                sleep(5);
+                header("Location: user.php");
+                
+
+                $destroy_api = $conn->prepare("DELETE FROM api_code WHERE username = ?");
+                $destroy_api->bind_param("s", $accounts["username"]);
+                $destroy_api->execute();
+
+                exit();
+
+            }
+
+            
         } else {
 
-            $destroy_api = $conn->prepare("DELETE FROM api_code WHERE id = ?");
-            $destroy_api->bind_param("i", $accounts["id"]);
+            $destroy_api = $conn->prepare("DELETE FROM api_code WHERE username = ?");
+            $destroy_api->bind_param("s", $accounts["username"]);
             $destroy_api->execute();
             session_start();
 
             session_destroy();
 
-            echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
+            include 'session_';
         }
 
     }
     
+
 } else {
     
-    session_destroy();
-    echo '<script>
-                alert("Authentication Failed Session Destroy")
-                window.location.href = "login.html"
-            </script>';
-    sleep(2);
-
-    exit();
+    echo 'Hellow ';
 
 } 
 
-$conn->close();
+
 
 } else {
 
@@ -71,6 +83,6 @@ $conn->close();
 
 }
 
-
+$conn->close();
 
 ?>
