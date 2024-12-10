@@ -2,7 +2,7 @@
 
 session_start();
 
-sleep(10);
+sleep(5);
 
 header("Location: carts_through.php");
 

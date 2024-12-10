@@ -250,6 +250,8 @@ if (isset($_SESSION["username"])) {
                                 </div>
                             ';
 
+                        } else {
+                            include 'session_destroy.php';
                         }
                         
                     ?>

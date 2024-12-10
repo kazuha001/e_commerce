@@ -69,9 +69,9 @@ if (isset($_SESSION["username"])) {
                                         <div class="status">
                                             <h2>' . $row["product_name"] . '</h2>
                                             <h4>Total Price: ' . $row["prize"] . '</h4>
-                                            <h4>Quantity: ' . $row["qty"] . '</h4><p style="font-size: 12px;">TRID: ' . $row["id"] . ' // Fee: ' . $row["tax"] . '</p>
+                                            <h4>Quantity: ' . $row["qty"] . '</h4><p style="font-size: 12px;">TRID: ' . $row["id"] . ' // Fee: ' . $row["tax"] . '</p>       
                                             <button>Cancel</button>
-                
+
                                         </div>
                                     </div>
                                 ';
@@ -83,9 +83,7 @@ if (isset($_SESSION["username"])) {
                                 $process_id = $row["process"];
 
                             }   
-                            
-                            
-                            
+                                 
 
                         } else {
         

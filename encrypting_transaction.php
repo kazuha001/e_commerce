@@ -1,5 +1,7 @@
 <?php
 include 'server.php';
+
+include 'error.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -84,7 +84,7 @@ $stmt2_result = $stmt2->get_result();
                 <input type="hidden" id="total" value="">
                 <input type="hidden" id="seller" name="seller" value="">
                 <!-- Important -->
-                <input type="hidden" id="PRID" name="productId" value="" required>
+                <input type="hidden" id="PRID" name="PRID" value="" required>
 
             </div>
             </form>

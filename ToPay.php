@@ -38,23 +38,83 @@ if (isset($_SESSION["username"])) {
         <div class="content">
             <div class="content_items">
 
-                <div class="items">
-                    <div class="items_img">
-                        <img src="images/images.png" alt="images">
-                    </div>
-                    <div class="status">
-                        <h2>Product Name</h2>
-                        <h4>Price: 500</h4>
-                        <h4>Quantity: 5</h4>
-                        
-                    </div>
+            <?php
+
+            if ($check_result->num_rows > 0) {
+
+$accounts = $check_result->fetch_assoc();
+
+include 'encrypt.php';
+
+include 'key.php';
+
+$process = "to_pay";
+
+$trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ? AND process = ?");
+$trans->bind_param("is", $accounts["id"], $process);
+$trans->execute();
+$trans_result = $trans->get_result();
+
+if ($trans_result->num_rows > 0) {
+
+    $trans_final = $trans_result->fetch_all(MYSQLI_ASSOC);
+
+    $result = 0;
+
+    foreach ($trans_final as $row) {
+        
+        echo '
+            <div class="items">
+                <div class="items_img">
+                    <img src="product_img.php?user_id=' . $row["product_id"] . '" alt="images">
                 </div>
+                <div class="status">
+                    <h2>' . $row["product_name"] . '</h2>
+                    <h4>Total Price: ' . $row["prize"] . '</h4>
+                    <h4>Quantity: ' . $row["qty"] . '</h4><p style="font-size: 12px;">TRID: ' . $row["id"] . ' // Fee: ' . $row["tax"] . '</p>
 
-
+                </div>
             </div>
-            <form id="submit">
+        ';
+
+       $result += $row["prize"];
+       
+        $result_id = $row["user_id"];
+
+        $process_id = $row["process"];
+
+    }   
+    
+    
+    
+
+} else {
+
+    echo '
+            <h1>&nbsp;Empty....</h1>
+        ';
+
+}
+
+} else {
+
+include 'session_destroy.php';
+
+}
+
+
+
+
+?>
+                
+            </div>
+            <?php
+
+            echo '
+                <form id="submit">
             <div class="controller">
-                <h1>Total: 1000</h1>
+
+                <h1>Total: ' . $result .  '</h1>
                 <input type="hidden" id="system" value="100">
                 <div>
                     
@@ -75,6 +135,11 @@ if (isset($_SESSION["username"])) {
                 <h2>Admin Confirming your Request... </h2><span></span>
             </div>
             </form>
+            ';
+
+            
+
+            ?>
         </div>
     </div>
 </body>
