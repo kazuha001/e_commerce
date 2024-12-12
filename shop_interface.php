@@ -25,6 +25,8 @@ $stmt2_result = $stmt2->get_result();
 
     include 'session_destroy.php';
 
+    exit();
+
 }
 
 

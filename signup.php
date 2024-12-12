@@ -31,7 +31,7 @@ if (isset($_SESSION["domain"])) {
     exit();
 
 }
-
+$conn->close();
 ?>
 
 <!DOCTYPE html>

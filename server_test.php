@@ -58,7 +58,7 @@ if ($conn->connect_error) {
 <script>
             setTimeout(() => {
             window.location.href = "demo_login.php"
-            }, 20000)
+            }, 3000)
         </script>
     
            
@@ -67,6 +67,6 @@ if ($conn->connect_error) {
 }   
 
 
-
+$conn->close();
 
 ?>

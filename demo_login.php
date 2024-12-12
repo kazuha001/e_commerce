@@ -18,7 +18,10 @@ if (isset($_SESSION["domain"])) {
 
     </script>';
 
+
 } else {
+
+    session_unset();
 
     session_destroy();
 
@@ -124,6 +127,7 @@ if (isset($_SESSION["domain"])) {
     } else {
         console.log("No domain key found or invalid.");
     }
+
 
 </script>
 

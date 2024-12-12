@@ -6,7 +6,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_SESSION["username"])) {
 
-        $session = $_SESSION["username"];
+        include 'encrypt.php';
+
+        include 'key.php';
+
+        $domain = decryptPrize($_SESSION["username"], $key);
+        $session = $domain;
 
         $check = $conn->prepare("SELECT * FROM seller_shop WHERE username = ?");
         $check->bind_param("s", $session);
@@ -19,18 +24,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $edit_id = $_POST["edit_id"];
 
-            include 'dencrypt.php';
-
-            include 'key.php';
-
             $table = $conn->prepare("SELECT * FROM products_view WHERE id = ?");
             $table->bind_param("i", $edit_id);
             $table->execute();
             $table_result = $table->get_result();
 
             if ($table_result->num_rows > 0) {
-
-                
 
                 while ($row = $table_result->fetch_assoc()) {
 

@@ -1,13 +1,19 @@
 <?php
 include 'server.php';
+include 'error';
 session_start();
 
 if (isset($_SESSION["username"])) {
 
-    $username = $_SESSION["username"];
+    include 'encrypt.php';
+
+    include 'key.php';
+    
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
 
     $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $session);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -78,20 +84,11 @@ if (isset($_SESSION["username"])) {
 
             ';
 
-            $new_name = $shop_acc["username"] . " Shop";
-
-            $stmt3 = $conn->prepare("UPDATE seller_shop SET shop_name = ? WHERE user_id = ?");
-            $stmt3->bind_param("si", $new_name, $accounts["id"]);
-            $stmt3->execute();
 
             $table = $conn->prepare("SELECT * FROM products_view WHERE seller_id = ?");
             $table->bind_param("s", $shop_acc["id"]);
             $table->execute();
             $table_result = $table->get_result();
-
-            include 'dencrypt.php';
-
-            include 'key.php';
 
             if ($table_result->num_rows > 0) {
 
@@ -162,7 +159,24 @@ if (isset($_SESSION["username"])) {
                 
     <script src="script/shop_graph.js"></script>
     
-    </html>
+    <script>
+       
+       var domain = "' . htmlspecialchars($_SESSION["username"], ENT_QUOTES, 'UTF-8') . '";
+       
+       if (domain) {
+           var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?temporary?encryptedkey=" + encodeURIComponent(domain);
+           
+           
+           window.history.pushState({path: newUrl}, "", newUrl);
+           
+           console.log("Current session data (temporary key) is now in the URL!");
+       } else {
+           console.log("No domain key found or invalid.");
+       }
+   
+   
+</script>
+</html>
 
             ';
 
@@ -198,3 +212,4 @@ include 'session_destroy.php';
 
 
 ?>
+

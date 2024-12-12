@@ -37,16 +37,18 @@ if(isset($_SESSION["username"])) {
     </style>
    ';
 
-$username = $_SESSION["username"];
+   include 'encrypt.php';
 
-include 'dencrypt.php';
+   include 'key.php';
 
-include 'key.php';
+   $domain = decryptPrize($_SESSION["username"], $key);
+
+   $session = $domain;
 
 $allow = "100%";
 
 $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-$stmt->bind_param("s", $username);
+$stmt->bind_param("s", $session);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -70,11 +72,9 @@ if ($result->num_rows > 0) {
             $stmt3->bind_param("si", $acc_lv_up, $accounts["id"]);
             $stmt3->execute();
     
-            session_destroy();
-    
             session_start();
     
-            $_SESSION["username"] = $accounts["username"];
+
     
             echo '<script>
             

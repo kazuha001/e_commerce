@@ -7,23 +7,24 @@ session_start();
 if(isset($_SESSION["username"])) {
 
     $request_code_id = $_POST["code"];
-    $username = $_SESSION["username"];
-
-    $stmt = $conn->prepare("SELECT * FROM upgrade_request WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
     include 'encrypt.php';
 
     include 'key.php';
+
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
+
+    $stmt = $conn->prepare("SELECT * FROM upgrade_request WHERE username = ?");
+    $stmt->bind_param("s", $session);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     $allow = "100%";
 
     $encryptedPrize = encryptPrize($allow, $key);
 
     $stmt1 = $conn->prepare("UPDATE user_accounts SET access_key = ? WHERE username = ?");
-    $stmt1->bind_param("ss", $encryptedPrize, $username);
+    $stmt1->bind_param("ss", $encryptedPrize, $session);
     $stmt1->execute();
 
     if ($result->num_rows > 0) {
@@ -43,8 +44,6 @@ if(isset($_SESSION["username"])) {
                 $check_acc = $check_result->fetch_assoc();
 
                 session_start();
-
-                $_SESSION["username"] = $check_acc["username"];
                 
                 sleep(5);
                 header("Location: creating_shop.php");

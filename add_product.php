@@ -8,7 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_SESSION["username"])) {
 
-        $session = $_SESSION["username"];
+        include 'encrypt.php';
+
+        include 'key.php';
+
+        $domain = decryptPrize($_SESSION["username"], $key);
+        $session = $domain;
 
         $check = $conn->prepare("SELECT * FROM seller_shop WHERE username = ?");
         $check->bind_param("s", $session);
@@ -22,10 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $product_name = $_POST["product_name"];
 
             $product_uppercase = ucwords($product_name);
-
-            include 'encrypt.php';
-
-            include 'key.php';
 
             $prize = $_POST["prize"];
             

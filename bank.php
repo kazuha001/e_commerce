@@ -12,7 +12,7 @@ $bank = $_POST["banking"];
 
 $process = $_POST["process"];
 
-include 'dencrypt.php';
+include 'encrypt.php';
 
 include 'key.php';
 

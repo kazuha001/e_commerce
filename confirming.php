@@ -13,8 +13,7 @@ $process = $_POST["process"];
 
 $user_id = $_POST["user_id"];
 
-
-include 'dencrypt.php';
+include 'encrypt.php';
 
 include 'key.php';
 

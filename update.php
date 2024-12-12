@@ -8,11 +8,16 @@ session_start();
 
 if(isset($_SESSION["username"])) {
 
-    $username = $_SESSION["username"];
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
     $cu_password = $_POST["cu_password"];
     
     $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-    $check->bind_param("s", $username);
+    $check->bind_param("s", $session);
     
     $check->execute();
     $result = $check->get_result();

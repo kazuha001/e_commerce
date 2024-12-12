@@ -1,11 +1,17 @@
 <?php
 include 'server.php';
-
+include 'error.php';
 session_start();
 
 if (isset($_SESSION["id"])) {
 
-    $username = $_SESSION["id"];
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["id"], $key);
+
+    $username = $domain;
 
     $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE id = ?");
     $stmt->bind_param("i", $username);
@@ -95,17 +101,37 @@ if (isset($_SESSION["id"])) {
 
 </footer>
 <script src="script/validating.js"></script>
-</html>';
+
+';
 } else {
     
     include 'session_destroy.php';
 
     }
 
+} else {
+
+    include 'session_destroy.php';
+
 }
 
 
-
-
-
 ?>
+<script>
+       
+       var domain = "<?php echo htmlspecialchars($_SESSION["id"], ENT_QUOTES, 'UTF-8'); ?>";
+       
+       if (domain) {
+           var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?temporary?encryptedkey=" + encodeURIComponent(domain);
+           
+           
+           window.history.pushState({path: newUrl}, '', newUrl);
+           
+           console.log("Current session data (temporary key) is now in the URL!");
+       } else {
+           console.log("No domain key found or invalid.");
+       }
+   
+   
+</script>
+</html>

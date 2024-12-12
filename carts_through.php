@@ -6,7 +6,12 @@ session_start();
 
 if (isset($_SESSION["username"])) {
 
-    $session = $_SESSION["username"];
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
 
     $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
     $check->bind_param("s", $session);
@@ -41,10 +46,6 @@ if (isset($_SESSION["username"])) {
                     if ($check_result->num_rows > 0) {
 
                         $accounts = $check_result->fetch_assoc();
-
-                        include 'encrypt.php';
-
-                        include 'key.php';
 
                         $process = "Carts";
 

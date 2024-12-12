@@ -4,10 +4,15 @@ session_start();
 
 if (isset($_SESSION["username"])) {
 
-    $username = $_SESSION["username"];
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
 
     $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $session);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -108,7 +113,7 @@ if (isset($_SESSION["username"])) {
     
     <script src="script/shop.js"></script>
     
-    </html>
+   
             
             ';
 
@@ -146,3 +151,22 @@ if (isset($_SESSION["username"])) {
 
 
 ?>
+<script>
+       
+       var domain = "<?php echo htmlspecialchars($_SESSION["username"], ENT_QUOTES, 'UTF-8'); ?>";
+       
+       if (domain) {
+           var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?temporary?encryptedkey=" + encodeURIComponent(domain);
+           
+           
+           window.history.pushState({path: newUrl}, '', newUrl);
+           
+           console.log("Current session data (temporary key) is now in the URL!");
+       } else {
+           console.log("No domain key found or invalid.");
+       }
+   
+   
+</script>
+</html>
+

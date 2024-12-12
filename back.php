@@ -3,12 +3,16 @@ include 'server.php';
 session_start();
 
 if(isset($_SESSION["id"])) {
+    
+    include 'encrypt.php';
 
-    $request_code_id = $_POST["code"];
-    $username = $_SESSION["id"];
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["id"], $key);
+    $session = $domain;
 
     $stmt = $conn->prepare("SELECT * FROM user_accounts WHERE id = ?");
-    $stmt->bind_param("i", $username);
+    $stmt->bind_param("i", $session);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -25,7 +29,7 @@ if(isset($_SESSION["id"])) {
 
             echo '<script>
                 alert("Authentication Failed Session Destroy")
-                window.location.href = "demo_login.php"
+                window.location.href = "index.php"
             </script>';
         
 

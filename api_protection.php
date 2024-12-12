@@ -1,25 +1,26 @@
 <?php
 
-
-
 include 'server.php';
 
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-
 if(isset($_SESSION["id"])) {
 
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["id"], $key);
+
     $request_code_id = $_POST["code"];
-    $username = $_SESSION["id"];
+    $username = $domain;
 
     $stmt = $conn->prepare("SELECT * FROM api_code WHERE user_id = ?");
     $stmt->bind_param("i", $username);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    
 
     if ($result->num_rows > 0) {
 
@@ -36,10 +37,15 @@ if(isset($_SESSION["id"])) {
             if ($check_result->num_rows > 0) {
 
                 $check_acc = $check_result->fetch_assoc();
+                session_unset();
+                session_destroy();
+                
 
+                include 'key.php';
+
+                $domain = encryptPrize($accounts["username"], $key);
                 session_start();
-
-                $_SESSION["username"] = $check_acc["username"];
+                $_SESSION["username"] = $domain;
                 
                 sleep(5);
                 header("Location: user.php");

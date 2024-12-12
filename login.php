@@ -8,8 +8,6 @@ session_start();
 
 if (isset($_SESSION["domain"])) {
 
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $username_id = $_POST["username"];
@@ -75,9 +73,16 @@ $result = $stmt->get_result();
             sleep(3);
             session_start();
 
-            $_SESSION["id"] = $accounts["id"];
+            include 'encrypt.php';
+
+            include 'key.php';
+
+            $domain = encryptPrize($accounts["id"], $key);
+
+            $_SESSION["id"] = $domain;
 
             header("Location: 2FA.php");
+
             exit();
             
         } else {
@@ -114,11 +119,11 @@ $conn->close();
 
 } else {
 
-    session_destroy();
-
     echo '<script>
         alert("Invalid Domain Key")
     </script>';
+
+    include 'session_destroy.php';
 
     echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>';
 

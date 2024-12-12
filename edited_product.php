@@ -8,7 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_SESSION["username"])) {
 
-        $session = $_SESSION["username"];
+        include 'encrypt.php';
+
+        include 'key.php';
+
+        $domain = decryptPrize($_SESSION["username"], $key);
+        $session = $domain;
 
         $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
         $check->bind_param("s", $session);
@@ -64,9 +69,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         'message' => ' Updated Succesfully'
                     ];
 
-                    include 'encrypt.php';
-
-                    include 'key.php';
 
                     $encryptedPrize = encryptPrize($prize, $key);
 

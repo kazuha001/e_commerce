@@ -4,10 +4,15 @@ session_start();
 
 if(isset($_SESSION["username"])) {
     
-    $username = $_SESSION["username"];
+    include 'encrypt.php';
+
+    include 'key.php';
+
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
     
     $stmt = $conn->prepare("SELECT * FROM admin_account WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $session);
     $stmt->execute();
     $result = $stmt->get_result();
     
