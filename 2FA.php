@@ -3,6 +3,8 @@ include 'server.php';
 include 'error.php';
 session_start();
 
+
+
 if (isset($_SESSION["id"])) {
 
     include 'encrypt.php';
@@ -64,14 +66,14 @@ if (isset($_SESSION["id"])) {
         <!-- Forgot Password -->
         <div class="log_in">
             <div class="log_in_form" id="animation1">
-                <div class="overlay_images"><img src="Icons/loginPp.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/loginPp.gif" alt="gif"></div>
                 <form action="api_protection.php" method="post">
                     <h1>2FA authentication</h1>
                     <div class="log_in_form_fill" id="redwarning">
                         <label for="username"> Enter Code:</label>
                         <div class="log_in_form_fill_overlay">
                             <div class="overlay_1"></div><!-- Overlay -->
-                            <input type="text" id="code" name="code" placeholder="Code has been sent to your emails" required autocomplete="code">
+                            <input type="text" id="code" name="code" placeholder="Access Code has been sent to your emails" required autocomplete="code">
                         </div>
                         
                     </div>

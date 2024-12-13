@@ -58,7 +58,7 @@ if (isset($_SESSION["domain"])) {
         <!-- Log In -->
         <div class="log_in">
             <div class="log_in_form" id="animation1">
-                <div class="overlay_images"><img src="Icons/loginPp.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/loginPp.gif" alt="gif"></div>
                 <form action="login.php" method="post">
                  <h1>Log In</h1>
                     <div class="log_in_form_fill">
@@ -75,7 +75,7 @@ if (isset($_SESSION["domain"])) {
                         <div class="log_in_form_fill_overlay">
                             <div class="overlay_2"></div><!-- Overlay -->
                             <input type="password" id="password" name="password" placeholder="Enter your Password" required autocomplete="new-password">
-                            <img src="Icons/invisible.png" alt="images" onclick="showpasswd()" id="showpass">
+                            <img src="css/Icons/invisible.png" alt="images" onclick="showpasswd()" id="showpass">
                         </div>
                         
                     </div>

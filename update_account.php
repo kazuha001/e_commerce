@@ -44,7 +44,7 @@ if (isset($_SESSION["username"])) {
         <div class="sign_in">
             <div class="sign_in_form" id="animation2"><!-- Sign Up -->
 
-                <div class="overlay_images"><img src="Icons/open-enrollment.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/open-enrollment.gif" alt="gif"></div>
                 <h1>Update Information</h1>
                 <form id="myform">
                 <div class="sign_in_form_fill_profile_pic">
@@ -123,7 +123,7 @@ if (isset($_SESSION["username"])) {
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_9"></div><!-- Overlay -->
                             <input type="password" id="cu_password" name="cu_password" placeholder="Enter your Password">
-                            <img src="Icons/invisible.png" alt="images" onclick="showpasswd()" id="showpass">
+                            <img src="css/Icons/invisible.png" alt="images" onclick="showpasswd()" id="showpass">
                         </div>
                         
                     </div>
@@ -133,7 +133,7 @@ if (isset($_SESSION["username"])) {
                         <div class="sign_in_form_fill_overlay" id="highlights">
                             <div class="overlay_9"></div><!-- Overlay -->
                             <input type="password" id="new_password1" name="new_password1" placeholder="Enter your Password">
-                            <img src="Icons/invisible.png" alt="images" onclick="showpasswd1()" id="showpass1">
+                            <img src="css/Icons/invisible.png" alt="images" onclick="showpasswd1()" id="showpass1">
                         </div>
                         
                     </div>

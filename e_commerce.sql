@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 12, 2024 at 07:08 PM
+-- Generation Time: Dec 13, 2024 at 07:11 PM
 -- Server version: 11.4.3-MariaDB-1
 -- PHP Version: 8.2.26
 
@@ -51,8 +51,10 @@ CREATE TABLE `api_code` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `username` varchar(20) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `code` int(6) NOT NULL,
-  `time` timestamp NULL DEFAULT current_timestamp()
+  `time` timestamp NULL DEFAULT current_timestamp(),
+  `access_key` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -118,8 +120,10 @@ CREATE TABLE `upgrade_request` (
   `id` int(10) NOT NULL,
   `user_id` int(20) NOT NULL,
   `username` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `code` varchar(6) NOT NULL,
-  `time` timestamp NULL DEFAULT current_timestamp()
+  `time` timestamp NULL DEFAULT current_timestamp(),
+  `access_key` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -159,7 +163,8 @@ ALTER TABLE `admin_account`
 --
 ALTER TABLE `api_code`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_user_id1` (`user_id`);
+  ADD KEY `fk_user_id1` (`user_id`),
+  ADD KEY `fk_emails_121` (`email`);
 
 --
 -- Indexes for table `products_view`
@@ -202,6 +207,7 @@ ALTER TABLE `user_accounts`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `fk_email` (`email`),
   ADD KEY `address` (`address`);
 
 --
@@ -218,37 +224,37 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `api_code`
 --
 ALTER TABLE `api_code`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `products_view`
 --
 ALTER TABLE `products_view`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `seller_shop`
 --
 ALTER TABLE `seller_shop`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `upgrade_request`
 --
 ALTER TABLE `upgrade_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -258,6 +264,7 @@ ALTER TABLE `user_accounts`
 -- Constraints for table `api_code`
 --
 ALTER TABLE `api_code`
+  ADD CONSTRAINT `fk_emails_121` FOREIGN KEY (`email`) REFERENCES `user_accounts` (`email`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user_accounts` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_user_id1` FOREIGN KEY (`user_id`) REFERENCES `user_accounts` (`id`) ON UPDATE CASCADE;
 

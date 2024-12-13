@@ -69,7 +69,8 @@ if (empty($decryptBank)) {
 
 if (isset($_SESSION["username"])) {
 
-    $session = $_SESSION["username"];
+    $domain = decryptPrize($_SESSION["username"], $key);
+    $session = $domain;
 
     $check = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
     $check->bind_param("s", $session);

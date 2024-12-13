@@ -46,7 +46,10 @@ if(isset($_SESSION["id"])) {
                 $domain = encryptPrize($accounts["username"], $key);
                 session_start();
                 $_SESSION["username"] = $domain;
-                
+                $stmt4 = $conn->prepare("UPDATE user_accounts SET username_key = ? WHERE username = ?");
+                $stmt4->bind_param("ss", $domain, $check_acc["username"]);
+                $stmt4->execute();
+
                 sleep(5);
                 header("Location: user.php");
                 

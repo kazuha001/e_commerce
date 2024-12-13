@@ -53,7 +53,7 @@ if (isset($_SESSION["username"])) {
             <div class="overlay_title"><h1>Seller Option</h1></div>
             <div class="overlay_burger_menu_function" onclick="ordered()"><h3>Ordered</h3></div>
             <div class="overlay_burger_menu_function" onclick="sell_product()"><h3>Sell Products</h3></div>
-            <div class="overlay_burger_menu_function" onclick="seller_pp()"><img src="Icons/id-cardV2.png" alt=""><h3>Seller Profile</h3></div>
+            <div class="overlay_burger_menu_function" onclick="seller_pp()"><img src="retrieve_img_shop.php?user_id=' . $shop_acc['username'] . '" alt=""><h3>Seller Profile</h3></div>
         </div><!-- Overlay -->
         <div class="header">
             <div class="overlay_burger" id="bugershow">
@@ -116,15 +116,29 @@ if (isset($_SESSION["username"])) {
                     </tr>';
 
                 }
+                echo '
+                </tbody>
+                    </table>    
+            ';
 
-            }
+        } else {
+            echo '
+            </tbody>
+                    </table>    
+                    
+            <div class="graph">
+                <h1>No Data</h1>
+                <img src="load/no-content.png" alt="No Content">
+            </div>
+             
+        ';
+        }
 
            
                                 
             
             echo '  
-                                </tbody>
-                            </table>
+                            
                             <form id="myform">
                                 <table>
                                     <thead>

@@ -53,7 +53,7 @@ $conn->close();
     <div class="container">
         <div class="sign_in">
             <div class="sign_in_form" id="animation2"><!-- Sign Up -->
-                <div class="overlay_images"><img src="Icons/open-enrollment.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/open-enrollment.gif" alt="gif"></div>
                 <form id="myform">
                     <h1>Sign Up</h1>
                     <div class="sign_in_form_fill">
@@ -123,7 +123,7 @@ $conn->close();
                         <div class="sign_in_form_fill_overlay" id="highlights">
                             <div class="overlay_9"></div><!-- Overlay -->
                             <input type="password" id="password1" name="password1" placeholder="Enter your Password" required>
-                            <img src="Icons/invisible.png" alt="images" onclick="showpasswd1()" id="showpass1">
+                            <img src="css/Icons/invisible.png" alt="images" onclick="showpasswd1()" id="showpass1">
                         </div>
                         
                     </div>

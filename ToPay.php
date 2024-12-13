@@ -163,8 +163,8 @@ if ($trans_result->num_rows > 0) {
                         </div>
                     </div>
                     <div class="payform" id="payform">
-                    <img src="https://th.bing.com/th/id/OIP.C9tdWrxKQvY5KlP9MgxmawHaHa?rs=1&pid=ImgDetMain" alt="gcash" style="width:60px; height: 60px; border-radius: 20px;">
-                    <h4>Current Location: ' . $accounts["address"] . '</h4>
+                    <img src="https://i.pinimg.com/originals/20/27/3c/20273cfda041b47e89e057a4c2296928.png" alt="gcash" style="width:60px; height: 60px; border-radius: 20px;">
+                    <h4>Current Number: ' . $accounts["mnumber"] . '</h4>
                     <div>
                         <img src="https://th.bing.com/th/id/OIP.XWZuoYEF1vpD9nGA917kkgHaGi?rs=1&pid=ImgDetMain" alt="gcash" style="width:60px; height: 60px; border-radius: 20px;">
                         <input type="radio" name="banking" id="banking1" value="' . $encryptBank1 . '" required> <label for="banking1">Gcash</label>

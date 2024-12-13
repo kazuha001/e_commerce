@@ -22,13 +22,13 @@ function showpasswd() {
 
     if (passwordId.type === "password") {
 
-        showpassId.src = "Icons/see.png"
+        showpassId.src = "css/Icons/see.png"
 
         passwordId.type = "text"
 
     } else {
 
-        showpassId.src = "Icons/invisible.png"
+        showpassId.src = "css/Icons/invisible.png"
 
         passwordId.type = "password"
 

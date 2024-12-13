@@ -1,8 +1,6 @@
 <?php
 include 'server.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'error.php';
 session_start();
 
 if(isset($_SESSION["username"])) {
@@ -10,6 +8,7 @@ if(isset($_SESSION["username"])) {
     echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Creating Shop Server Redirecting Please Wait
 <span class="Animation">...........</span> </h1>
 </div>
+<p>From this User id = ' . $_SESSION["username"] . '</p>
 <div style="width: 100% height: auto; display:flex; justify-content: center;"><img src="load/loading.gif" style="width=: 120px; height: 120px;"></div>
 
     <style>
@@ -52,6 +51,36 @@ $stmt->bind_param("s", $session);
 $stmt->execute();
 $result = $stmt->get_result();
 
+    $checkquery = $conn->prepare("SELECT COUNT(*) FROM seller_shop WHERE username = ?");
+    $checkquery->bind_param("s", $session);
+    $checkquery->execute();
+    $checkquery->bind_result($count);
+    $checkquery->fetch();
+    
+
+    if ($count > 0) {
+        
+        $checkquery->close();
+        $destroy = $conn->prepare("DELETE FROM seller_shop WHERE username = ?");
+        $destroy->bind_param("s", $session);
+        $destroy->execute();
+
+        $access_key_destroy = NULL;
+        $acc_lv = "Minor";
+        $access_key = $conn->prepare("UPDATE user_accounts SET acc_lv = ?, access_key = ? WHERE username = ?");
+        $access_key->bind_param("sss", $acc_lv, $access_key_destroy, $session);
+        $access_key->execute();
+
+        echo '
+            <script>
+                alert("The Session Has Been Refresh Shop and Access Key Destroy")
+                window.location.href = "logout.php"
+            </script>
+        ';
+        exit();
+    } 
+
+    $checkquery->close();
 
 if ($result->num_rows > 0) {
 
@@ -72,10 +101,6 @@ if ($result->num_rows > 0) {
             $stmt3->bind_param("si", $acc_lv_up, $accounts["id"]);
             $stmt3->execute();
     
-            session_start();
-    
-
-    
             echo '<script>
             
                 setTimeout(() => {
@@ -84,7 +109,6 @@ if ($result->num_rows > 0) {
             </script>
                 
             ';
-    
             exit();
         
             
@@ -96,7 +120,7 @@ if ($result->num_rows > 0) {
         session_destroy();
         echo '<script>
         alert("Invalid Access Key!!!!")
-        window.location.href = "demo_login.php";
+        window.location.href = "index.php";
         </script>
         
         
@@ -104,7 +128,7 @@ if ($result->num_rows > 0) {
         sleep(2);
     }
 
-   
+    
 
 } else {
 

@@ -48,6 +48,7 @@ if (isset($_SESSION["username"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Icons/id-card.png" type="image/x-icon">
     <title>2FA authentication code</title>
 
     <!-- CSS links -->
@@ -64,7 +65,7 @@ if (isset($_SESSION["username"])) {
         <!-- Forgot Password -->
         <div class="log_in">
             <div class="log_in_form" id="animation1">
-                <div class="overlay_images"><img src="Icons/loginPp.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/loginPp.gif" alt="gif"></div>
                 <form action="api_protection_2.php" method="post">
                     <h1>2FA authentication <br> Account Upgrade</h1>
                     <div class="log_in_form_fill" id="redwarning">
@@ -102,20 +103,18 @@ if (isset($_SESSION["username"])) {
 </footer>
 <script src="script/validating.js"></script>
 ';
-        } 
-        
-        
-        if ($accounts["access_key"] == NULL){
+        } else {
 
-        echo '<script>
-                alert("Server SESSION DOWN!!! Unique Key Cannot be Duplicated in username Already Existed")
+            echo '<script>
+                alert("Server SESSION DOWN!!!")
                 window.location.href = "user_pp.php"
             </script>';
         sleep(2);
 
         exit();
-    
+
         }
+        
 
 
 

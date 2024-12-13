@@ -30,7 +30,13 @@ if ($username_id == "admin") {
 
             session_start();
 
-            $_SESSION["username"] = $admin_accounts["username"];
+            include 'encrypt.php';
+
+            include 'key.php';
+
+            $domain = encryptPrize($admin_accounts["username"], $key);
+
+            $_SESSION["username"] = $domain;
 
             header("Location: admin.php");
 
@@ -52,9 +58,9 @@ if ($username_id == "admin") {
 
 $code = str_pad(mt_rand(000000, 999999), 6, '0', STR_PAD_LEFT);
 
-$stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ?");
+$stmt = $conn->prepare("SELECT * FROM user_accounts WHERE username = ? OR email = ?");
 
-$stmt->bind_param("s", $username_id);
+$stmt->bind_param("ss", $username_id, $username_id);
 
 $stmt->execute();
 
@@ -65,22 +71,22 @@ $result = $stmt->get_result();
         $accounts = $result->fetch_assoc();
     
         if (password_verify($passwd_id, $accounts['passwd_hash'])) {
-    
-            $stmt2 = $conn->prepare("INSERT INTO api_code (user_id, username, code) VALUES (? , ?, ?)");
-            $stmt2->bind_param("iss", $accounts["id"], $accounts["username"], $code);
-            $stmt2->execute();
-
-            sleep(3);
-            session_start();
-
             include 'encrypt.php';
 
             include 'key.php';
 
             $domain = encryptPrize($accounts["id"], $key);
 
+            $stmt2 = $conn->prepare("INSERT INTO api_code (user_id, username, email, code, access_key) VALUES (? , ?, ?, ?, ?)");
+            $stmt2->bind_param("issss", $accounts["id"], $accounts["username"], $accounts["email"], $code, $domain);
+            $stmt2->execute();
+            session_unset();
+            sleep(3);
+            session_start();
+
             $_SESSION["id"] = $domain;
 
+            
             header("Location: 2FA.php");
 
             exit();

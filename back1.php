@@ -25,11 +25,9 @@ if(isset($_SESSION["username"])) {
             $destroy_api->execute();
             session_start();
 
-            session_destroy();
-
             echo '<script>
                 alert("Authentication Failed Session Destroy")
-                window.location.href = "index.php"
+                window.location.href = "update_account.php"
             </script>';
         
 

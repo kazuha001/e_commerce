@@ -29,21 +29,21 @@ document.getElementById("myform").addEventListener("submit", function(event) {
         })
         .then(response => response.json())
         .then(data => {
+
             if (data.success) {
                 alert(data.message)
-
-                window.location.reload()
-
-            } else {
-                alert("Error" + data.message)
-
+            }
+            
+            if (data.success1) {
+                window.location.href = "2FA_2.php"
+                alert(data.message)
             }
         })
         
 
         .catch(error => {
-            alert("Redirecting SESSION...CA")
-            window.location.href = "2FA_2.php";
+            console.log(error)
+            
         });
     }
         
@@ -87,13 +87,13 @@ function showpasswd() {
 
     if (passwordId.type === "password") {
 
-        showpassId.src = "Icons/see.png"
+        showpassId.src = "css/Icons/see.png"
 
         passwordId.type = "text"
 
     } else {
 
-        showpassId.src = "Icons/invisible.png"
+        showpassId.src = "css/Icons/invisible.png"
 
         passwordId.type = "password"
 
@@ -110,13 +110,13 @@ function showpasswd1() {
 
     if (password1Id.type === "password") {
 
-        showpass1Id.src = "Icons/see.png"
+        showpass1Id.src = "css/Icons/see.png"
 
         password1Id.type = "text"
 
     } else {
 
-        showpass1Id.src = "Icons/invisible.png"
+        showpass1Id.src = "css/Icons/invisible.png"
 
         password1Id.type = "password"
 

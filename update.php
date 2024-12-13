@@ -44,18 +44,23 @@ if(isset($_SESSION["username"])) {
 
                     $code = str_pad(mt_rand(000000, 999999), 6, '0', STR_PAD_LEFT);
     
-                    $r_code = $conn->prepare("INSERT INTO upgrade_request (user_id, username, code) VALUES (?, ?, ?)");
-                    $r_code->bind_param("iss", $check_accounts["id"], $check_accounts["username"], $code);
+                    $r_code = $conn->prepare("INSERT INTO upgrade_request (user_id, username, email, code, access_key) VALUES (?, ?, ?, ?, ?)");
+                    $r_code->bind_param("issss", $check_accounts["id"], $check_accounts["username"], $check_accounts["email"], $code, $_SESSION["username"]);
                     $r_code->execute();
                     
                     session_start();
+                    $response = [
+                        'success1' => true,
+                        'message' => ' Redirecting Authentication'
+                    ];
+                    echo json_encode($response);
+                    exit();
 
-                    header("Location: 2FA_2.php");
 
                 } else {
 
                     $response = [
-                        'success' => false,
+                        'success1' => false,
                         'message' => ' Cannot Procced Update Please Change No || Already ACC Major'
                     ];
                     echo json_encode($response);
