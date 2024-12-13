@@ -54,8 +54,8 @@
 .tables_function_elements td {
     text-align: center;
     background-color: #1e1e1e;
-    height: 50px;
     color: #fff;
+    overflow: hidden;
 }
 /* Overlay */
 .overlay_burger_menu {
@@ -108,7 +108,7 @@
 .overlay_1 {
     width: 40px;
     height: 40px;
-    background-image: url('Icons/images.png');
+    background-image: url('Icons/personnel.gif');
     background-position: center;
     background-size: cover;
     margin: 10px;
@@ -177,4 +177,20 @@
     align-items: center;
     overflow: hidden;
     margin: 15px;
+}
+.graph {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    background-color: #1e1e1e;
+}
+.graph h1 {
+    color: #f00;
+}
+.graph img {
+    width: 120px;
+    height: 120px;
 }
