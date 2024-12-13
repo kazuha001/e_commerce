@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2024 at 07:11 PM
+-- Generation Time: Dec 13, 2024 at 08:43 PM
 -- Server version: 11.4.3-MariaDB-1
 -- PHP Version: 8.2.26
 
@@ -145,7 +145,8 @@ CREATE TABLE `user_accounts` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `acc_lv` varchar(50) DEFAULT NULL,
   `img` longblob DEFAULT NULL,
-  `access_key` varchar(200) DEFAULT NULL
+  `access_key` varchar(200) DEFAULT NULL,
+  `username_key` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -224,37 +225,37 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `api_code`
 --
 ALTER TABLE `api_code`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `products_view`
 --
 ALTER TABLE `products_view`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `seller_shop`
 --
 ALTER TABLE `seller_shop`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `upgrade_request`
 --
 ALTER TABLE `upgrade_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
