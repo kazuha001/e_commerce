@@ -194,3 +194,9 @@
     width: 120px;
     height: 120px;
 }
+.buttons_f {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    background-color: #1e1e1e;
+}
