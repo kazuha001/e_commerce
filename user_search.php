@@ -24,11 +24,17 @@ if (isset($_SESSION["username"])) {
     $shop->execute();
     $shop_result = $shop->get_result();
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $product = $conn->prepare("SELECT * FROM products_view LIMIT ? OFFSET ?");
-    $product->bind_param("ii", $limit, $start);
-    $product->execute();
-    $product_result = $product->get_result();
+        $search = $_POST["search"];
+
+        $product = $conn->prepare("SELECT * FROM products_view WHERE id = ? OR product_name LIKE ? LIMIT ? OFFSET ?");
+        $product->bind_param("isii", $search, $search, $limit, $start);
+        $product->execute();
+        $product_result = $product->get_result();
+
+    }
+    
 
 
 } else {
@@ -238,7 +244,7 @@ if (isset($_SESSION["username"])) {
                 
                 
                 <div class="search" id="header_prevention">
-                    <form action="user_search.php" method="POST">
+                    <form method="POST">
                         <input type="search" placeholder="What are you looking for?" id="search" name="search">
                     </form>
                     
@@ -442,10 +448,8 @@ if (isset($_SESSION["username"])) {
 
                             if ($product_result->num_rows > 0) {
 
-                                $product_row = $product_result->fetch_all(MYSQLI_ASSOC);
+                               while($product_rows = $product_result->fetch_assoc()) {
                                 
-                                foreach ($product_row as $product_rows) {
-
                                     $decryptedPrize = decryptPrize($product_rows['prize'], $key);
 
                                     $encryptedId = encryptPrize($product_rows["id"], $key);

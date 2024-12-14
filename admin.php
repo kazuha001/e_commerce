@@ -40,9 +40,10 @@ if(isset($_SESSION["username"])) {
     <div class="container">
         <div class="overlay_burger_menu" id="burger_overlay">
            <div class="overlay_title"><h1>Admin Option</h1></div>
-            <div class="overlay_burger_menu_function" onclick="user_request_code()"><h3>User Request Code</h3></div>
+          <div class="overlay_burger_menu_function" onclick="user_request_code()"><h3>User Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="restaurant_request_code()"><h3>Upgrade Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="purchases_validation()"><h3>Confirm Purchases Validation</h3></div>
+            <div class="overlay_burger_menu_function" onclick="bank_confirm()"><h3>Request Payment</h3></div>
             <div class="overlay_burger_menu_function" onclick="adminPP()"><img src="css/Icons/id-cardV2.png" alt=""><h3>Admin Profile</h3></div>
         </div><!-- Overlay -->
         <div class="header">

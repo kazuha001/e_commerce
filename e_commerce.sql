@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2024 at 08:43 PM
+-- Generation Time: Dec 14, 2024 at 10:49 PM
 -- Server version: 11.4.3-MariaDB-1
 -- PHP Version: 8.2.26
 
@@ -86,7 +86,8 @@ CREATE TABLE `seller_shop` (
   `username` varchar(8) NOT NULL,
   `img` longblob DEFAULT NULL,
   `time` timestamp NULL DEFAULT current_timestamp(),
-  `address` varchar(200) NOT NULL
+  `address` varchar(200) NOT NULL,
+  `balance` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
@@ -98,11 +99,13 @@ CREATE TABLE `seller_shop` (
 CREATE TABLE `trans` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
+  `shop_name` varchar(50) NOT NULL,
   `seller_id` int(10) NOT NULL,
   `product_id` int(10) NOT NULL,
   `product_name` varchar(100) NOT NULL,
+  `pr_price` varchar(50) NOT NULL,
   `bank` varchar(20) DEFAULT NULL,
-  `tax` varchar(50) NOT NULL,
+  `tax` double NOT NULL,
   `prize` varchar(10) NOT NULL,
   `qty` varchar(10) NOT NULL,
   `process` varchar(50) NOT NULL,
@@ -146,7 +149,8 @@ CREATE TABLE `user_accounts` (
   `acc_lv` varchar(50) DEFAULT NULL,
   `img` longblob DEFAULT NULL,
   `access_key` varchar(200) DEFAULT NULL,
-  `username_key` varchar(200) DEFAULT NULL
+  `username_key` varchar(200) DEFAULT NULL,
+  `request_order` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -192,7 +196,8 @@ ALTER TABLE `trans`
   ADD KEY `fk_seller_id2` (`seller_id`),
   ADD KEY `fk_product_id1` (`product_id`),
   ADD KEY `fk_user_id5` (`user_id`),
-  ADD KEY `fk_prd` (`product_name`);
+  ADD KEY `fk_prd` (`product_name`),
+  ADD KEY `fk_username211` (`shop_name`);
 
 --
 -- Indexes for table `upgrade_request`
@@ -225,37 +230,37 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `api_code`
 --
 ALTER TABLE `api_code`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `products_view`
 --
 ALTER TABLE `products_view`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `seller_shop`
 --
 ALTER TABLE `seller_shop`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `upgrade_request`
 --
 ALTER TABLE `upgrade_request`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables

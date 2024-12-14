@@ -30,36 +30,53 @@ if (isset($_SESSION["username"])) {
 
         $accounts = $check_result->fetch_assoc();
 
-        $shop = $conn->prepare("SELECT * FROM seller_shop WHERE username = ?");
-        $shop->bind_param("s", $accounts["username"]);
-        $shop->execute();
-        $shop_result = $shop->get_result();
+        $decryptedSeller = decryptPrize($seller_id, $key);   
 
-        if ($shop_result->num_rows > 0) {
+        $decryptedToken = decryptPrize($token_id, $key);
 
-            $shop_acc = $shop_result->fetch_assoc();
+        $decryptedId = decryptPrize($productId, $key);
 
-            $shop_cff = $shop_acc["username"];
+        $seller = $conn->prepare("SELECT * FROM seller_shop WHERE id = ?");
+        $seller->bind_param("i", $decryptedSeller);
+        $seller->execute();
+        $seller_result = $seller->get_result();
 
-        } else {
+        if ($seller_result->num_rows > 0) {
 
-            $shop_cff = "none";
+            $seller_acc = $seller_result->fetch_assoc();
+
+            $seller_name = $seller_acc["shop_name"];
+
+            $seller->close();
 
         }
 
-            include 'dencrypt.php';
+        $trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ?");
+        $trans->bind_param("i", $accounts["id"]);
+        $trans->execute();
+        $trans_result = $trans->get_result();
 
-            include 'key.php';
+        if ($trans_result->num_rows > 0) {
+            
+            $trans_acc = $trans_result->fetch_assoc();
 
-            $decryptedToken = decryptPrize($token_id, $key);
+            if ($trans_acc["admin_conf"] != NULL) {
 
-            $decryptedId = decryptPrize($productId, $key);
+                echo '
+                    <script>
+                        alert("You have a Pending Request access denied")
+                        window.location.href = "user.php"
+                    </script>
+                ';
 
-            $decryptedSeller = decryptPrize($seller_id, $key);
+                exit();
 
-            if ($accounts["username"] !== $shop_cff) {
+            }
 
-                
+        }
+
+            if ($accounts["username"] !== $seller_name) {
+
                 $product = $conn->prepare("SELECT * FROM products_view WHERE id = ?");
                 $product->bind_param("i", $decryptedId);
                 $product->execute();
@@ -80,14 +97,14 @@ if (isset($_SESSION["username"])) {
                 $total_fee2 = $total_qty * 0.0026;
                 $total = $total_qty + $total_fee2;
 
-                $tax = "2.6% || " . $total_fee2;
+                $tax = $total_fee2;
 
                 $process = "Carts";
 
-                $stmt = $conn->prepare("INSERT INTO trans (user_id, seller_id, product_id, product_name, tax, prize, qty, process)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                $stmt = $conn->prepare("INSERT INTO trans (user_id, shop_name, seller_id, product_id, product_name, pr_price, tax, prize, qty, process)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ");
-                $stmt->bind_param("iiisssss", $accounts["id"], $decryptedSeller, $decryptedId, $product_name, $tax, $total, $qty_id, $process);
+                $stmt->bind_param("isiissssss", $accounts["id"], $seller_name ,$decryptedSeller, $decryptedId, $product_name, $decryptedToken, $tax, $total, $qty_id, $process);
                 if ($stmt->execute()) {
                     echo '<script>
                         alert("Added Succesfully!!!")

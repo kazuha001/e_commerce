@@ -1,15 +1,22 @@
 <?php
+echo '<script>
+            
+setInterval(() => {
+window.location.href = "back.php"
+alert("2 mins Given Temporary key has been Denied")
+}, 200000)
+
+</script>';
 include 'server.php';
 include 'error.php';
 session_start();
-
-
 
 if (isset($_SESSION["id"])) {
 
     include 'encrypt.php';
 
     include 'key.php';
+    
 
     $domain = decryptPrize($_SESSION["id"], $key);
 
@@ -59,7 +66,7 @@ if (isset($_SESSION["id"])) {
     
     <link rel="stylesheet" href="css/log_in_sign_up.css">
 </head>
-<body style="background-color: #000;">
+<body>
     
     <div class="container">
 
@@ -119,6 +126,7 @@ if (isset($_SESSION["id"])) {
 
 
 ?>
+<iframe src="protection.php" style="display: none;"></iframe>
 <script>
        
        var domain = "<?php echo htmlspecialchars($_SESSION["id"], ENT_QUOTES, 'UTF-8'); ?>";
@@ -136,4 +144,5 @@ if (isset($_SESSION["id"])) {
    
    
 </script>
+
 </html>

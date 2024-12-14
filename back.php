@@ -35,7 +35,16 @@ if(isset($_SESSION["id"])) {
 
     }
     
-} 
+} else {
+    session_start();
+
+    session_destroy();
+
+    echo '<script>
+        alert("Authentication Failed Session Destroy")
+        window.location.href = "index.php"
+    </script>';
+}
 
 $conn->close();
 

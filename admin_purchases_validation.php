@@ -30,6 +30,7 @@
             <div class="overlay_burger_menu_function" onclick="user_request_code()"><h3>User Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="restaurant_request_code()"><h3>Upgrade Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="purchases_validation()"><h3>Confirm Purchases Validation</h3></div>
+            <div class="overlay_burger_menu_function" onclick="bank_confirm()"><h3>Request Payment</h3></div>
             <div class="overlay_burger_menu_function" onclick="adminPP()"><img src="css/Icons/id-cardV2.png" alt=""><h3>Admin Profile</h3></div>
         </div><!-- Overlay -->
         <div class="header">
@@ -39,27 +40,12 @@
                 <span></span>
             </div>
             <div class="overlay_1"></div><!-- Overlay -->
-            <div class="title"><h2>Admin & Customer Service</h2></div>
+            <div class="title"><h2>Confirm Purchases Validation</h2></div>
         </div>
         <div class="content">
             <div class="user_request" id="">
                 <div class="tables_function">
-                    <h1>User Request Code</h1>
-                    <div class="tables_function_elements">
-                        <table>
-                            <thead>
-                                <th style="width: 10%;">Trans Id</th>
-                                <th style="width: 10%;">Username</th>
-                                <th style="width: 10%;">Shop Name</th>
-                                <th style="width: 10%;">Product Name</th>
-                                <th style="width: 10%;">Price</th>
-                                <th style="width: 10%;">Quantity</th>
-                                <th style="width: 10%;">Total</th>
-                                <th style="width: 10%;">Bank</th>
-                                <th style="width: 10%;">Time</th>
-                                <th style="width: 10%;">Action</th>
-                            </thead>
-                            <tbody>
+                    
 
 <?php
 include 'server.php';
@@ -77,111 +63,100 @@ if(isset($_SESSION["username"])) {
     $stmt->bind_param("s", $session);
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
     if ($result->num_rows > 0) {
 
-        $admin = $result->fetch_assoc();
+        $access_point = "Ordering";
 
-        $process = "Proccessing";
+        $user = $conn->prepare("SELECT * FROM user_accounts WHERE request_order = ?");
+        $user->bind_param("s", $access_point);
+        $user->execute();
+        $user_result = $user->get_result();
 
-        $stmt = $conn->prepare("SELECT * FROM trans WHERE admin_conf = ?");
-        $stmt->bind_param("s", $process);
-        $stmt->execute();
-        $stmt_result = $stmt->get_result();
+        if ($user_result->num_rows > 0) {
 
-        
+            $acc = $user_result->fetch_all(MYSQLI_ASSOC);
 
-        if ($stmt_result->num_rows > 0) {
+            foreach ($acc as $row) {
 
-            $stmt_api = $stmt_result->fetch_all(MYSQLI_ASSOC);
-
-            foreach ($stmt_api as $rows){
-
-                $check = $conn->prepare("SELECT * FROM user_accounts WHERE id = ?");
-                $check->bind_param("i", $rows["user_id"]);
-                $check->execute();
-                $check_result = $check->get_result();
-
-                if ($check_result->num_rows > 0) {
-
-                    $accounts = $check_result->fetch_assoc();
-                    
-                $shop = $conn->prepare("SELECT * FROM seller_shop WHERE id = ?");
-                $shop->bind_param("i", $rows["seller_id"]);
-                $shop->execute();
-                $shop_result = $shop->get_result();
-
-                if ($shop_result->num_rows > 0) {
-
-                    $shop_acc = $shop_result->fetch_assoc();
-
-                    $product = $conn->prepare("SELECT * FROM products_view WHERE id = ?");
-                    $product->bind_param("i", $rows["product_id"]);
-                    $product->execute();
-                    $product_result = $product->get_result();
-
-                    if ($product_result->num_rows > 0) {
-
-                        $pr_result = $product_result->fetch_assoc();
-
-                        $price = decryptPrize($pr_result["prize"], $key);
-
-                        echo '
-                        <tr>
-                            <td>' . $rows["id"] . '</td>
-                            <td>' . $accounts["username"] . '</td>
-                            <td>' . $shop_acc["shop_name"] . '</td>
-                            <td>' . $rows["product_name"] . '</td>
-                            <td>' . $price . '</td>
-                            <td>' . $rows["qty"] . '</td>
-                            <td>' . $rows["prize"] . '</td>
-                            <td>' . $rows["bank"] . '</td>
-                            <td>' . $rows["date"] . '</td>
-                            <td style="display: flex; justify-content: center; align-items: center;">
-                                <form id="sendmail">
-                                    <input type="hidden" name="to_email" value="' . $accounts["email"] . '">
-                                    <input type="hidden" name="to_name" value="' . $accounts["username"] . '">
-                                    <input type="hidden" name="message" value="Please Verify your ' . $rows["bank"] . ' number is ' . $accounts["mnumber"] . ' 
-                                    click this to confirm your order http://localhost/e_commerce-main/verify_pay.php || access key = ' . $accounts["username_key"] . '">
-                                    <button style="background-color: #0f0;">SEND</button>
-                                </form>
-                                <form method="POST">
-                                    <button style="background-color: #f00;" type="submit">DENIED</button>
-                                </form>
-                            </td>
-                        </tr>
+                echo '
+                <h1>User Request || ' . $row["username"] . '</h1>
+                <div class="tables_function_elements">
+                <table>
+                    <thead>
+                        <th>Trans ID</th>
+                        <th>Username</th>
+                        <th>Shop</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Payment Method</th>
+                        <th>Time</th>
+                    </thead>
+                    <tbody>
                     ';
-                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      
-                        $stmt = $conn->prepare("DELETE FROM trans WHERE id = ?");
-                        $stmt->bind_param("i", $rows["id"]);
-                        $stmt->execute();
-                   
-        
-                    header("Location: ".$_SERVER['PHP_SELF']);
-                
-                } 
-                    }
-                    
-                  
+            $set = "Proccessing";
+            $trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ? AND admin_conf = ?");
+            $trans->bind_param("ss", $row["id"], $set);
+            $trans->execute();
+            $trans_result = $trans->get_result();
+            
+            if ($trans_result->num_rows > 0) {
+
+                $trans_acc = $trans_result->fetch_all(MYSQLI_ASSOC);
+                $result = 0;
+                foreach ($trans_acc as $row2) {
+
+                    echo '
+                    <tr>
+                        <td style="height: 100px;">' . $row2["id"] . '</td>
+                        <td>' . $row["username"] . '</td>
+                        <td>' . $row2["shop_name"] . '</td>
+                        <td>' . $row2["product_name"] . '</td>
+                        <td>' . $row2["pr_price"] . '</td>
+                        <td>' . $row2["qty"] . '</td>
+                        <td>' . $row2["prize"] . '</td>
+                        <td>' . $row2["bank"] . '</td>
+                        <td>' . $row2["date"] . '</td>
+                    </tr>
+                    ';
+
+                    $result += $row2["prize"];
 
                 }
-                
-                   
-
-                }
-        
-                
 
             }
 
-            echo '
-                </tbody>
-                    </table>    
-                    </div>
+                echo '
+                <div class="buttons_f">
+                    <form id="sendmail">
+                        <input type="hidden" name="to_email" value="' . $row["email"] . '">
+                        <input type="hidden" name="to_name" value="' . $row["username"] . '">
+                        <input type="hidden" name="message" value="Hellow, please confirm your number ' . $row["mnumber"] . '
+                        click this link http://localhost/e_commerce-main/verify_pay.php your total payment is ' . $result . '">
+                        <button style="background-color: #0f0;">SEND Request</button>
+                    </form>
+                    <form method="POST">
+                        <input type="hidden" name="user_id" value="' . $row["id"] . '">
+                        <button style="background-color: #ff0; type="submit" name="confirm" ">Confirm</button>
+                    </form>
+                    <form method="POST">
+                        <input type="hidden" name="user_id" value="' . $row["id"] . '">
+                        <button style="background-color: #f00; type="submit" name="denied" ">DENIED</button>
+                    </form>
                 </div>
-            </div>
-            ';
+                <div class="buttons_f">
+                    <h1 style="color: #fff;">Total: ' . $result . '</h1>
+                </div>
+                </tbody>
+                </table>
+                </div>
+                ';
+
+                
+
+            }
 
         } else {
             echo '
@@ -198,17 +173,56 @@ if(isset($_SESSION["username"])) {
         ';
         }
 
-      
+
+
+    } else {
+
+        include 'session_destroy.php';
+
+    }
 
 } else {
     
     include 'session_destroy.php';
 
     }
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST["confirm"])) {
+            $admin_conf = "Confirming";
+            $user_re = "Ordering2";
+            $user_id = $_POST["user_id"];
+            $stmt = $conn->prepare("UPDATE trans SET admin_conf = ? WHERE user_id = ?");
+            $stmt->bind_param("si", $admin_conf,$user_id);
+            $stmt->execute();
+            $stmt1 = $conn->prepare("UPDATE user_accounts SET request_order = ? WHERE id = ?");
+            $stmt1->bind_param("si", $user_re, $user_id);
+            $stmt1->execute();
 
+            echo '
+                <script>
+                    alert("Confirming Order")
+                    window.location.href = "admin_purchases_validation.php"
+                </script>
+            ';
+        }
+        if (isset($_POST["denied"])) {
+            $user_re = NULL;
+            $user_id = $_POST["user_id"];
+            $stmt = $conn->prepare("DELETE FROM trans WHERE user_id = ?");
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $stmt1 = $conn->prepare("UPDATE user_accounts SET request_order = ? WHERE id = ?");
+            $stmt1->bind_param("si", $user_re, $user_id);
+            $stmt1->execute();
+            echo '
+                <script>
+                    alert("Denied Order")
+                    window.location.href = "admin_purchases_validation.php"
+                </script>
+            ';
+        }
 
-}
-
+    }
 
 $conn->close();
 

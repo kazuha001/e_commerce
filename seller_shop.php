@@ -92,6 +92,10 @@ if (isset($_SESSION["username"])) {
                         <p id="status">' . $shop_acc["username"] . '</p>
                     </div>
                     <div>
+                        <label for="status">Account Balance: </label>
+                        <p id="status">' . $shop_acc["balance"] . '</p>
+                    </div>
+                    <div>
                         <label for="status">Publish Time: </label>
                         <p id="status">' . $shop_acc["time"] . '</p>
                     </div>

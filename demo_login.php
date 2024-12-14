@@ -10,7 +10,7 @@ if (isset($_SESSION["domain"])) {
 
     echo '<script>
             
-        setTimeout(() => {
+        setInterval(() => {
         
         window.location.href = "destroy_temporary_domain.php"
     

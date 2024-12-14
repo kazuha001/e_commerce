@@ -48,7 +48,7 @@ $conn->close();
     
     <link rel="stylesheet" href="css/log_in_sign_up.css">
 </head>
-<body style="background-image: url('images/overlay_bg.jpg');">
+<body>
     
     <div class="container">
         <div class="sign_in">

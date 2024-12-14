@@ -30,6 +30,7 @@
             <div class="overlay_burger_menu_function" onclick="user_request_code()"><h3>User Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="restaurant_request_code()"><h3>Upgrade Request Code</h3></div>
             <div class="overlay_burger_menu_function" onclick="purchases_validation()"><h3>Confirm Purchases Validation</h3></div>
+            <div class="overlay_burger_menu_function" onclick="bank_confirm()"><h3>Request Payment</h3></div>
             <div class="overlay_burger_menu_function" onclick="adminPP()"><img src="css/Icons/id-cardV2.png" alt=""><h3>Admin Profile</h3></div>
         </div><!-- Overlay -->
         <div class="header">
@@ -103,6 +104,7 @@ if(isset($_SESSION["username"])) {
                             <button style="background-color: #0f0;">CONFIRM</button>
                         </form>
                         <form method="POST">
+                            <input type="hidden" name="user_id" value="' . $rows["user_id"] . '">
                             <button style="background-color: #f00; type="submit" name="denied" ">DENIED</button>
                         </form>
                     </td>
@@ -110,6 +112,22 @@ if(isset($_SESSION["username"])) {
             ';
 
             }
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                
+                if (isset($_POST["denied"])) {
+                    $user = $_POST["user_id"];
+                    $stmt = $conn->prepare("DELETE FROM api_code WHERE user_id = ?");
+                    $stmt->bind_param("i", $user);
+                    $stmt->execute();
+                    echo '
+                        <script>
+                            alert("Denied Order")
+                            window.location.href = "admin_user.php"
+                        </script>
+                    ';
+                }
+        
+            } 
 
             echo '
                 </tbody>
@@ -154,7 +172,11 @@ if(isset($_SESSION["username"])) {
     }
 
 
-}
+} else {
+    
+    include 'session_destroy.php';
+
+    }
 
 
 $conn->close();

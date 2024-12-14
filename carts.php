@@ -57,7 +57,6 @@ if (isset($_SESSION["username"])) {
                     <button onclick="ToRecieve()">To Recieve</button>
                     <button onclick="ReturnRefund()">Return/Refund</button>
                     <button onclick="Complete()">Completed</button>
-                    <button onclick="Cancelled()">Cancelled</button>
                     <span id="navigator"></span>
                 </div>
                 

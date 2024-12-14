@@ -136,6 +136,12 @@ if ($trans_result->num_rows > 0) {
             }
             
             </style>
+
+            <script>
+                setInterval(() => {
+                    window.location.reload()
+                }, 2000)
+            </script>
                         
             ';
 
@@ -157,10 +163,9 @@ if ($trans_result->num_rows > 0) {
                     <h1>Total: ' . $result . '</h1>
                     <input type="hidden" id="system" value="100">
                     <div>
-                        
                         <button class="bt1" type="submit">Pay</button>
-                        <button class="bt2">Cancel</button>
-                        </div>
+                        <button class="bt2" name="cancel">Cancel</button>
+                    </div>
                     </div>
                     <div class="payform" id="payform">
                     <img src="https://i.pinimg.com/originals/20/27/3c/20273cfda041b47e89e057a4c2296928.png" alt="gcash" style="width:60px; height: 60px; border-radius: 20px;">

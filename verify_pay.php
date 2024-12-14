@@ -1,40 +1,11 @@
 <?php
-
+sleep(2);
 include 'server.php';
 include 'error.php';
 session_start();
 
 if(isset($_SESSION["username"])) {
-    echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Confirming your ordered Please Wait
-<span class="Animation">...........</span> </h1>
-</div>
-<p>From this User id = ' . $_SESSION["username"] . '</p>
-<div style="width: 100% height: auto; display:flex; justify-content: center;"><img src="load/loading.gif" style="width=: 120px; height: 120px;"></div>
-
-    <style>
     
-    .Animation {
-        animation: blink 2s infinite;
-    }
-
-    @keyframes blink {
-        0% {
-            opacity: 1;
-            width: 0%;
-        }
-        50% {
-            opacity: 0;
-            width: 50%;
-        }
-        100% {
-            opacity: 1;
-            width: 100%;
-        }
-    
-    }
-    
-    </style>
-   ';
 
     include 'encrypt.php';
 
@@ -53,17 +24,114 @@ if(isset($_SESSION["username"])) {
 
         $accounts = $check_result->fetch_assoc();
 
-        if ($accounts["username_key"] === $_SESSION["username"]) {
+        $admin_conf = "Confirming";
 
+        $trans = $conn->prepare("SELECT * FROM trans WHERE admin_conf = ?");
+        $trans->bind_param("s", $admin_conf);
+        $trans->execute();
+        $trans_result = $trans->get_result();
 
+        if ($trans_result->num_rows > 0) {
 
+            $trans_cf = $trans_result->fetch_assoc();
+
+            if ($trans_cf["bank"] === "Gcash") {
+                echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Confirming your Payments
+                <span class="Animation">...........</span> </h1>
+                </div>
+                <p>From this User id = ' . $_SESSION["username"] . '</p>
+                <div style="width: 100% height: auto; display:flex; justify-content: center;">
+                    <img src="load/loading.gif" style="width=: 120px; height: 120px;">
+                </div>
+                <div style="width: 100% height: auto; display:flex; justify-content: center;">
+                    <img src="bank/gcash.jpg" style="width: 360px;">
+                </div>
+
+                    <style>
+                    
+                    .Animation {
+                        animation: blink 2s infinite;
+                    }
+
+                    @keyframes blink {
+                        0% {
+                            opacity: 1;
+                            width: 0%;
+                        }
+                        50% {
+                            opacity: 0;
+                            width: 50%;
+                        }
+                        100% {
+                            opacity: 1;
+                            width: 100%;
+                        }
+                    
+                    }
+                    
+                    </style>
+                     <script>
+                        setInterval(() => {
+                            window.location.reload()
+                        }, 5000)
+                    </script>
+                    ';
+            }
+
+            if ($trans_cf["bank"] === "Paymaya") {
+                echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Confirming your Payments
+                <span class="Animation">...........</span> </h1>
+                </div>
+                <p>From this User id = ' . $_SESSION["username"] . '</p>
+                <div style="width: 100% height: auto; display:flex; justify-content: center;">
+                    <img src="load/loading.gif" style="width=: 120px; height: 120px;">
+                </div>
+                <div style="width: 100% height: auto; display:flex; justify-content: center;">
+                    <img src="bank/paymaya.jpg" style="width: 360px;">
+                </div>
+
+                    <style>
+                    
+                    .Animation {
+                        animation: blink 2s infinite;
+                    }
+
+                    @keyframes blink {
+                        0% {
+                            opacity: 1;
+                            width: 0%;
+                        }
+                        50% {
+                            opacity: 0;
+                            width: 50%;
+                        }
+                        100% {
+                            opacity: 1;
+                            width: 100%;
+                        }
+                    
+                    }
+                    
+                    </style>
+                    <script>
+                        setInterval(() => {
+                            window.location.reload()
+                        }, 5000)
+                    </script>
+
+                    ';
+
+            }
+               
+           
+        
         } else {
             echo '
             <script>
-                alert("Access Denied your Tempory Connection has been Destroy")
+                alert("Admin did not sent a current request...Please check your Carts")
+                window.location.href = "carts.php"
             </script>
             ';
-            echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>';
         }
 
     }
@@ -74,11 +142,12 @@ $conn->close();
 } else {
 
     echo '
-    <script>
-        alert("Access Denied your Tempory Connection has been Destroy")
-    </script>
-    ';
-    echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>';
+            <script>
+                alert("Access Denied your Tempory Connection has been Destroy")
+            </script>
+            ';
+            session_destroy();
+            echo '<div style="width:100%; display: flex; justify-content: center;"><h1>Invalid Request :(</h1></div>';
 }
 
 

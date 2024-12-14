@@ -26,7 +26,7 @@ if(isset($_SESSION["username"])) {
             session_start();
 
             echo '<script>
-                alert("Authentication Failed Session Destroy")
+                alert("Authentication Failed")
                 window.location.href = "update_account.php"
             </script>';
         

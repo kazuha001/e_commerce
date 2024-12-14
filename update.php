@@ -48,14 +48,12 @@ if(isset($_SESSION["username"])) {
                     $r_code->bind_param("issss", $check_accounts["id"], $check_accounts["username"], $check_accounts["email"], $code, $_SESSION["username"]);
                     $r_code->execute();
                     
-                    session_start();
                     $response = [
                         'success1' => true,
                         'message' => ' Redirecting Authentication'
                     ];
                     echo json_encode($response);
-                    exit();
-
+                    
 
                 } else {
 

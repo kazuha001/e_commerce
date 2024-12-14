@@ -1,4 +1,12 @@
 <?php
+echo '<script>
+            
+setInterval(() => {
+window.location.href = "back1.php"
+alert("1 mins Given Temporary key has been Denied")
+}, 60000)
+
+</script>';
 include 'server.php';
 session_start();
 
@@ -128,7 +136,7 @@ if (isset($_SESSION["username"])) {
 }
 
 ?>
-
+<iframe src="protection2.php" style="display: none;"></iframe>
 <script>
        
        var domain = "<?php echo htmlspecialchars($_SESSION["username"], ENT_QUOTES, 'UTF-8'); ?>";

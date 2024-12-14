@@ -60,8 +60,10 @@ if (isset($_SESSION["username"])) {
 
                             $result = 0;
 
+                            
+
                             foreach ($trans_final as $row) {
-                                
+                                $encryptTransId = encryptPrize($row["id"], $key);
                                 echo '
                                     <div class="items">
                                         <div class="items_img">
@@ -71,7 +73,10 @@ if (isset($_SESSION["username"])) {
                                             <h2>' . $row["product_name"] . '</h2>
                                             <h4>Total Price: ' . $row["prize"] . '</h4>
                                             <h4>Quantity: ' . $row["qty"] . '</h4><p style="font-size: 12px;">TRID: ' . $row["id"] . ' // Fee: ' . $row["tax"] . '</p>       
-                                            <button>Cancel</button>
+                                            <form method="POST">
+                                            <input type="hidden" name="trans_id" value="' . $encryptTransId . '">
+                                            <button type="submit" name="cancel">Cancel</button>
+                                            </form>
 
                                         </div>
                                     </div>
@@ -84,7 +89,21 @@ if (isset($_SESSION["username"])) {
                                 $process_id = $row["process"];
 
                             }   
-                                 
+                            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                                if (isset($_POST["cancel"])) {
+
+                                    $identity = decryptPrize($_POST["trans_id"], $key);
+                                    $stmt = $conn->prepare("DELETE FROM trans WHERE id = ?");
+                                    $stmt->bind_param("i", $identity);
+                                    $stmt->execute();
+
+                                    echo '
+                                        <script>
+                                            window.location.href = "carts_through.php"
+                                        </script>
+                                    ';
+                                }
+                            }     
 
                         } else {
         
