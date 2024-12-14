@@ -45,7 +45,7 @@ if (isset($_SESSION["domain"])) {
 
     <link rel="icon" href="logo/e-commerce.png" type="image/x-icon">
     <!-- CSS links -->
-    
+    <link rel="manifest" href="manifest.json">
     <!-- Default css -->
     <link rel="stylesheet" href="css/default.css">
     

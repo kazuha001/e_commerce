@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo '<script>
                         alert("Printing this Data will be Destroy!!!")
                         window.print()
-                                
+                        window.location.href = "complete.php"
             </script>';
 
             $trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ?");
