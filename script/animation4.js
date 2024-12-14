@@ -59,18 +59,6 @@ function Complete() {
 
 }
 
-function Cancelled() {
-
-    var navigatorId = document.getElementById("navigator")
-
-    var Iframe_manipulatedId = document.getElementById("Iframe_manipulated")
-
-    navigatorId.style.left = "600px"
-
-    Iframe_manipulatedId.src = "cancel.php"
-
-}
-
 function back() {
 
     window.location.href = "user.php"

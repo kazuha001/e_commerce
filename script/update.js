@@ -32,15 +32,16 @@ document.getElementById("myform").addEventListener("submit", function(event) {
 
             if (data.success) {
                 alert(data.message)
-            }
-            
-            if (data.success1) {
-                window.location.href = "2FA_2.php"
+                window.location.reload()
+                
+            } else {
                 alert(data.message)
             }
+            if (data.success1) {
+                window.location.href = "2FA_2.php"
+            }
+           
         })
-        
-
         .catch(error => {
             console.log(error)
             

@@ -15,6 +15,11 @@ function purchases_validation() {
     window.location.href = "admin_purchases_validation.php"
 }
 
+function bank_confirm() {
+    window.location.href = "admin_confirming.php"
+
+}
+
 var bugershowId = document.getElementById("bugershow")
 
 var burger_overlayId = document.getElementById("burger_overlay")
