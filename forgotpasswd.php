@@ -56,13 +56,13 @@ if (isset($_SESSION["domain"])) {
         <div class="log_in">
             <div class="log_in_form" id="animation1">
                 <div class="overlay_images"><img src="css/Icons/loginPp.gif" alt="gif"></div>
-                <form action="" method="post">
+                <form action="login.php" method="post">
                     <h1>Forgot Password</h1>
                     <div class="log_in_form_fill">
                         <label for="username"> Username:</label>
                         <div class="log_in_form_fill_overlay">
                             <div class="overlay_1"></div><!-- Overlay -->
-                            <input type="text" id="username" name="username" placeholder="Enter your Username" required autocomplete="username">
+                            <input type="text" id="forgot" name="forgotpasswd" placeholder="Enter your Username or Email" required autocomplete="username">
                         </div>
                         
                     </div>

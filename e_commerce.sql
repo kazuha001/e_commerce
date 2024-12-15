@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 14, 2024 at 10:49 PM
+-- Generation Time: Dec 15, 2024 at 12:38 PM
 -- Server version: 11.4.3-MariaDB-1
 -- PHP Version: 8.2.26
 
@@ -230,7 +230,7 @@ ALTER TABLE `admin_account`
 -- AUTO_INCREMENT for table `api_code`
 --
 ALTER TABLE `api_code`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `products_view`
@@ -260,7 +260,7 @@ ALTER TABLE `upgrade_request`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

@@ -197,7 +197,12 @@ if (isset($_SESSION["username"])) {
     }
 
 
-}
+} else {
+
+    include 'session_destroy.php';
+    
+    }
+
 
 
 
