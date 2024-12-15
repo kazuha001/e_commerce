@@ -1,0 +1,446 @@
+.container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+body {
+    background-image: url('images/overlay_bg.jpg');
+}
+/* Log In */
+
+.log_in {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.log_in_form {
+    width: 40%;
+    height: auto;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    margin: 90px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideIn 1.5s forwards;
+}
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.log_in_form form {
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-flow: column;
+    justify-content: left;
+    align-items: center;
+}
+.log_in_form_fill {
+    width: 80%;
+    height: auto;
+    margin: 0 0 25px 0;
+}
+.log_in_form_fill_overlay {
+    width: auto;
+    height: auto;
+    display: flex;
+    border: 2px solid #b0e0e6;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.log_in_form_fill_overlay div {
+    width: 40px;
+    height: 30px;
+}
+.log_in_form_fill_overlay img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.log_in_form_fill label {
+    width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-weight: bolder;
+}
+.log_in_form_fill input {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    margin: 0 0 0 5px;
+    background: transparent;
+    border: transparent;
+}
+.log_in_form_button {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0 90px 0;
+}
+.log_in_form_button_overlay {
+    width: 35%;
+    height: auto;
+    display: flex;
+    overflow: hidden;
+    border: 2px solid #0ff;
+    border-radius: 15px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.log_in_form_button_overlay button {
+    width: 75%;
+    height: 40px;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.log_in_form_button_overlay div {
+    width: 25%;
+    height: 40px;
+}
+.log_in_form h1 {
+    margin: 90px 0 30px 0;
+}
+
+
+/* Sign Up */
+.sign_in {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.sign_in_form {
+    width: 40%;
+    height: auto;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    position: relative;
+    margin: 120px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideIn 1.5s forwards;
+}
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.sign_in_form form {
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-flow: column;
+    justify-content: left;
+    align-items: center;
+}
+.sign_in_form_fill {
+    width: 80%;
+    height: auto;
+    margin: 0 0 25px 0;
+}
+.sign_in_form_fill_overlay {
+    width: 100%;
+    height: auto;
+    display: flex;
+    border: 2px solid #0ff;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.sign_in_form_fill_overlay div {
+    width: 40px;
+    height: 30px;
+}
+.sign_in_form_fill_overlay img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.sign_in_form_fill label {
+    width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-weight: bolder;
+}
+.sign_in_form_fill input {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    margin: 0 0 0 5px;
+    background: transparent;
+    border: transparent;
+}
+select {
+    width: 100%;
+    border: transparent;
+}
+.sign_in_form_button {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0 90px 0;
+}
+.sign_in_form_button_overlay {
+    width: 35%;
+    height: auto;
+    display: flex;
+    overflow: hidden;
+    border: 2px solid #0ff;
+    border-radius: 15px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.sign_in_form_button_overlay button {
+    width: 75%;
+    height: 40px;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    font-weight: bold;
+}
+.sign_in_form_button_overlay div {
+    width: 25%;
+    height: 40px;
+}
+.sign_in_form h1 {
+    margin: 120px 0 30px 0;
+}
+
+/* Overlays */
+
+.overlay_images {
+    position: absolute;
+    top: -60px;
+    overflow: hidden;
+    border: 2px solid #0ff;
+    border-radius: 1000vh;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay_images img {
+    width: 100%;
+    height: 100%;
+}
+
+.overlay_1 {
+    background-image: url('Icons/id-card.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_fill_overlay:hover .overlay_1{
+    background-image: url('Icons/id-card.gif');
+}
+.overlay_2 {
+    background-image: url('Icons/password.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_fill_overlay:hover .overlay_2{
+    background-image: url('Icons/password.gif');
+}
+.overlay_3 {
+    background-image: url('Icons/open-enrollment.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_button_overlay:hover .overlay_3{
+    background-image: url('Icons/open-enrollment.gif');
+}
+.overlay_4 {
+    background-image: url('Icons/login.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_button_overlay:hover .overlay_4{
+    background-image: url('Icons/login.gif');
+}
+.overlay_5 {
+    background-image: url('Icons/id-cardV2.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_5{
+    background-image: url('Icons/id-cardV2.gif');
+}
+.overlay_6 {
+    background-image: url('Icons/forum.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_6{
+    background-image: url('Icons/forum.gif');
+}
+.overlay_7 {
+    background-image: url('Icons/email.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_7{
+    background-image: url('Icons/email.gif');
+}
+.overlay_8 {
+    background-image: url('Icons/id-card.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_8{
+    background-image: url('Icons/id-card.gif');
+}
+.overlay_9 {
+    background-image: url('Icons/password.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_9{
+    background-image: url('Icons/password.gif');
+}
+.overlay_10 {
+    background-image: url('Icons/password.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_10{
+    background-image: url('Icons/password.gif');
+}
+.overlay_11 {
+    background-image: url('Icons/left-arrow.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_button_overlay:hover .overlay_11{
+    background-image: url('Icons/left-arrow.gif');
+}
+.overlay_12 {
+    background-image: url('Icons/import.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_button_overlay:hover .overlay_12{
+    background-image: url('Icons/import.gif');
+}
+.overlay_13 {
+    background-image: url('Icons/birthday.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill:hover .overlay_13{
+    background-image: url('Icons/birthday.gif');
+}
+.overlay_14 {
+    background-image: url('Icons/left-arrow.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_button_overlay:hover .overlay_14{
+    background-image: url('Icons/left-arrow.gif');
+}
+.overlay_15 {
+    background-image: url('Icons/import.png');
+    background-position: center;
+    background-size: cover;
+}
+.log_in_form_button_overlay:hover .overlay_15{
+    background-image: url('Icons/import.gif');
+}
+.overlay_16 {
+    background-image: url('Icons/gender-equality.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_16{
+    background-image: url('Icons/gender-equality.gif');
+}
+.overlay_17 {
+    background-image: url('Icons/home.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_17{
+    background-image: url('Icons/home.gif');
+}
+.overlay_18 {
+    background-image: url('Icons/up.png');
+    background-position: center;
+    background-size: cover;
+}
+.sign_in_form_fill_overlay:hover .overlay_18{
+    background-image: url('Icons/up.gif');
+}
+
+/* Condition */
+.termsconds {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 15px 0;
+}
+.termsconds p {
+    font-weight: bold;
+}
+.termsconds input {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+/* Responsive */
+@media (max-width: 1200px) {
+    .log_in, .sign_in {
+        width: 1200px;
+    }
+    
+    .log_in_form, .sign_in_form {
+        width: 350px;
+        margin: 120px 0 20px 0;
+    }
+    .termsconds p {
+        font-size: 12px;
+        margin: 0 5px 0 5px;
+    }
+}

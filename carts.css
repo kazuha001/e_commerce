@@ -1,0 +1,83 @@
+.container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-flow: column;
+}
+.header {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    box-shadow: 0px 0px 2px 1px #000;
+}
+.header_top {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow: hidden;
+}
+.header_top button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 21px;
+    font-weight: bold;
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+.header_bottom {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    overflow: auto;
+}
+.header_bottom div {
+    width: 750px;
+    height: auto;
+    display: flex;
+}
+.header_bottom button{
+    width: 120px;
+    height: 40px;
+    background: transparent;
+    border: transparent;
+    font-weight: bold;
+    cursor: pointer;
+}
+.header_bottom button:hover {
+    background-color: #d9d9d9;
+}
+.header_bottom span {
+    width: 120px;
+    height: 3px;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: 0.5s ease-in-out;
+}
+.iframe_area {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.iframe_area div {
+    width: 800px;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    top: 50px;
+    left: 0;
+}
