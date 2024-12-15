@@ -55,7 +55,7 @@ if (isset($_SESSION["domain"])) {
         <!-- Forgot Password -->
         <div class="log_in">
             <div class="log_in_form" id="animation1">
-                <div class="overlay_images"><img src="Icons/loginPp.gif" alt="gif"></div>
+                <div class="overlay_images"><img src="css/Icons/loginPp.gif" alt="gif"></div>
                 <form action="" method="post">
                     <h1>Forgot Password</h1>
                     <div class="log_in_form_fill">
