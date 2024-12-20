@@ -1,10 +1,9 @@
 <?php
 include 'server.php';
-include 'error.php';
-
-session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    session_start();
 
     if (isset($_SESSION["username"])) {
 
@@ -49,6 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
                 echo json_encode($response);
                 
+                $stmt = $conn->prepare("INSERT INTO products_view (seller_id, product_name, prize, img) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("isss", $accounts["id"], $product_uppercase, $encryptedPrize, $img_id);
+                
+                $stmt->execute();
 
             }  else {
 
@@ -58,13 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
                 
                 echo json_encode($response);
-                $img_id = "";
             }
 
-            $stmt = $conn->prepare("INSERT INTO products_view (seller_id, product_name, prize, img) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("isss", $accounts["id"], $product_uppercase, $encryptedPrize, $img_id);
-            
-            $stmt->execute();
+           
             
 
         }else {

@@ -51,8 +51,8 @@ if (isset($_SESSION["username"])) {
 
         }
 
-        $trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ?");
-        $trans->bind_param("i", $accounts["id"]);
+        $trans = $conn->prepare("SELECT * FROM trans WHERE product_id = ?");
+        $trans->bind_param("i", $decryptedId);
         $trans->execute();
         $trans_result = $trans->get_result();
 
@@ -71,9 +71,34 @@ if (isset($_SESSION["username"])) {
 
                 exit();
 
+            } else {
+
+                $checkquery = $conn->prepare("SELECT COUNT(*) FROM trans WHERE product_id = ?");
+                $checkquery->bind_param("i", $decryptedId);
+                $checkquery->execute();
+                $checkquery->bind_result($count);
+                $checkquery->fetch();
+                
+
+                if ($count > 0) {
+
+                    echo '
+                        <script>
+                            alert("Please Cancelled this to add new quantity TRN: ' . $trans_acc["id"] . '")
+                            window.location.href = "user.php"
+                        </script>
+                    ';
+
+                    exit();
+                }
+
+                $checkquery->close();
+
             }
 
         }
+
+        
 
             if ($accounts["username"] !== $seller_name) {
 

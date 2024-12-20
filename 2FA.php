@@ -58,7 +58,7 @@ if (isset($_SESSION["id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2FA authentication code</title>
-    <link rel="icon" href="Icons/id-card.png" type="image/x-icon">
+    <link rel="icon" href="css/Icons/id-card.png" type="image/x-icon">
     <!-- CSS links -->
     
     <!-- Default css -->

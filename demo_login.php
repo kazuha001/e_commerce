@@ -14,7 +14,7 @@ if (isset($_SESSION["domain"])) {
         
         window.location.href = "destroy_temporary_domain.php"
     
-        }, 120000)
+        }, 500000)
 
     </script>';
 

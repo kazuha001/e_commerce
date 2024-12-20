@@ -14,7 +14,7 @@ if (isset($_SESSION["domain"])) {
         
         window.location.href = "destroy_temporary_domain.php"
     
-        }, 120000)
+        }, 500000)
 
     </script>';
 
@@ -60,7 +60,7 @@ $conn->close();
                         <label for="fname"> Fullname:</label>
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_5"></div><!-- Overlay -->
-                            <input type="text" id="fname" name="fname" placeholder="Enter your Fullname" required>
+                            <input type="text" id="fname" name="fname" placeholder="Enter your Fullname" maxlength="50" required>
                         </div>
                         
                     </div>
@@ -81,7 +81,7 @@ $conn->close();
                         <label for="number"> Mobile Number:</label>
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_6"></div><!-- Overlay -->
-                            <input type="tel" id="number" name="number" placeholder="Enter your Mobile Number" required>
+                            <input type="tel" id="number" name="number" placeholder="Enter your Mobile Number" maxlength="11" required>
                         </div>
                         
                     </div>
@@ -89,7 +89,7 @@ $conn->close();
                         <label for="birth"> Birthday:</label>
                         <div class="sign_in_form_fill_overlay">
                             <div class="overlay_13"></div><!-- Overlay -->
-                            <input type="date" id="birth" name="birth" placeholder="Enter your Mobile Number" required>
+                            <input type="date" id="birth" name="birth" required>
                         </div>
                         
                     </div>

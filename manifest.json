@@ -2,7 +2,7 @@
     "name": "Cordova",
     "short_name": "Cordy",
     "description": "Cordy First Web App Version 1",
-    "start_url": "index.php",
+    "start_url": "/index.php",
     "background_color": "#1e1e1e",
     "theme_color": "#1e1e1e",
     "display": "standalone",

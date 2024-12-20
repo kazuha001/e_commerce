@@ -27,7 +27,7 @@ if (isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Account</title>
-    <link rel="icon" href="Icons/open-enrollment.png" type="image/x-icon">
+    <link rel="icon" href="css/Icons/open-enrollment.png" type="image/x-icon">
     <!-- CSS links -->
     
     <!-- Default css -->
@@ -39,9 +39,11 @@ if (isset($_SESSION["username"])) {
 
 </head>
 <body>
-    
     <div class="container">
-        <div class="sign_in">
+    <div id="uploading" style="display: none; background-color: #fff; position: absolute;
+    z-index: 1; top: 40%; bottom: 40%; justify-content: center; align-items: center; padding: 20px; border-radius: 20px;">
+    <h1>Updating Info PLEASE WAIT...</h1></div>
+        <div class="sign_in" id="hide">
             <div class="sign_in_form" id="animation2"><!-- Sign Up -->
 
                 <div class="overlay_images"><img src="css/Icons/open-enrollment.gif" alt="gif"></div>

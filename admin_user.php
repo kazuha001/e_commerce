@@ -97,12 +97,26 @@ if(isset($_SESSION["username"])) {
                     <td><div style="width: 100px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin: 10px;">' . $rows["access_key"] . '</div></td>
                     <td>' . $rows["time"] . '</td>
                     <td style="display: flex; justify-content: center; align-items: center;">
-                        <form id="sendmail">
+                        <form id="sendmail' . $rows["user_id"] . '">
                             <input type="hidden" name="to_email" value="' . $rows["email"] . '">
                             <input type="hidden" name="to_name" value="' . $rows["username"] . '">
                             <input type="hidden" name="message" value="This is your Access Code ' . $rows["code"] . '">
                             <button style="background-color: #0f0;">CONFIRM</button>
                         </form>
+                        <script>
+                            // Add event listener to the form
+                            document.getElementById("sendmail' . $rows["user_id"] . '").addEventListener("submit", function(event) {
+                                event.preventDefault(); // Prevent default form submission behavior
+                                
+                                emailjs.sendForm("service_dfa7neq", "template_rwaoa8f", this)
+                                .then(function(response) {
+                                    alert("Email sent successfully! Status: " + response.status + ", Text: " + response.text);
+                                }, function(error) {
+                                    alert("Failed to send email! Error: " + error.text);
+                                });
+                            });
+
+                        </script>
                         <form method="POST">
                             <input type="hidden" name="user_id" value="' . $rows["user_id"] . '">
                             <button style="background-color: #f00; type="submit" name="denied" ">DENIED</button>
@@ -179,7 +193,6 @@ $conn->close();
 <footer>
 
 </footer>
-<script src="script/sendmail.js"></script>
 <script src="script/animation2.js"></script>
 
 </html>

@@ -460,8 +460,11 @@ if (isset($_SESSION["username"])) {
                                     <img src="product_img.php?user_id=' . $product_rows["id"] . '" alt="images">
                                 </div>
                                 <div class="products_foods_ads_info">
-                                    <h3>' . $product_rows["product_name"] . '</h3>
-                                    <p> ' . $decryptedPrize . ' / <u>Shipping Included</u></p>
+                                    <div class="text_limiter">
+                                        <h3>' . $product_rows["product_name"] . '</h3>
+                                        <p> ' . $decryptedPrize . ' / <u>Shipping Included</u></p>
+                                    </div>
+                                    
                                     <div class="products_foods_ads_info_funtion">
                                     <input type="hidden" class="PRID" name="productId" value="' . $encryptedId . '"><!-- Important -->
                                     <input type="hidden" class="seller" name="productId" value="' . $encryptedSellerId . '">

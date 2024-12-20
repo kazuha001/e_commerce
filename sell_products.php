@@ -37,7 +37,7 @@ if (isset($_SESSION["username"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Domain</title>
-    <link rel="icon" href="Icons/supermarket.png" type="image/x-icon">
+    <link rel="icon" href="css/Icons/supermarket.png" type="image/x-icon">
     <!-- CSS links -->
     <link rel="stylesheet" href="css/default.css">
 
@@ -48,7 +48,9 @@ if (isset($_SESSION["username"])) {
 
 </head>
 <body style="background-color: #1e1e1e;">
-    <div class="container">
+     <div id="uploading" style="display: none; width: 100%; justify-content: center; align-items: center; margin: 20px;">
+        <h1 style="color: #fff;">Adding PLEASE WAIT...</h1></div>
+        <div class="container" id="hide">
         <div class="overlay_burger_menu" id="burger_overlay">
             <div class="overlay_title"><h1>Seller Option</h1></div>
             <div class="overlay_burger_menu_function" onclick="ordered()"><h3>Ordered</h3></div>
@@ -151,9 +153,9 @@ if (isset($_SESSION["username"])) {
                                     <tbody>
                                         <tr>
                                             <td><img id="upImg" src="" alt="Product Img" style="width: 90px; height: 90px; margin: 10px;"></td>
-                                            <td><input id="uploadImg" type="file" name="img" accept="image/*" style="width: 50%; color: #fff;" required></td>
-                                            <td><input type="text" name="product_name" id="product_name" placeholder="Product Name" required></td>
-                                            <td><input type="number" name="prize" id="prize" placeholder="Input Prize" required></td>
+                                            <td><input id="uploadImg" type="file" name="img" accept="image/*" style="width: 50%; color: #fff;" required ></td>
+                                            <td><input type="text" name="product_name" id="product_name" placeholder="Product Name" required maxlength="20"></td>
+                                            <td><input type="number" name="prize" id="prize" placeholder="Input Price" required></td>
                                             <td><button style="background-color: #0f0;">Add Products</button></td>
                                         </tr>
                                     </tbody>

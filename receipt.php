@@ -48,11 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Payment Method</th>
                     </thead>
                     <tbody>';
-            echo '<script>
-                        alert("Printing this Data will be Destroy!!!")
-                        window.print()
-                        window.location.href = "complete.php"
-            </script>';
+            
 
             $trans = $conn->prepare("SELECT * FROM trans WHERE user_id = ?");
             $trans->bind_param("i", $check_acc["id"]);
@@ -94,27 +90,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     ';
             echo '</div>';
 
-            $destroy = $conn->prepare("DELETE FROM trans WHERE user_id = ?");
-            $destroy->bind_param("i", $check_acc["id"]);
-            $destroy->execute();
+            echo '<script>
+                        
+                        window.print()
+                        alert("After Printing this Data will be Destroy!!!")
 
+                        setTimeout(() => {
+
+                            window.location.href = "destroy.php"
+                        
+                        }, 3000)
+                        
+            </script>';
 
         } else {
 
-            
+                include 'session_destroy.php';
         }
 
 
 
     } else {
 
-        
+        include 'session_destroy.php';
 
     }
 
 
 } else {
 
+    include 'session_destroy.php';
     
 }
 

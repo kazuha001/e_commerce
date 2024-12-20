@@ -40,7 +40,7 @@ if (isset($_SESSION["username"])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" href="Icons/supermarket.png" type="image/x-icon">
+        <link rel="icon" href="css/Icons/supermarket.png" type="image/x-icon">
         <title>Seller Domain</title>
         
         <!-- CSS links -->
@@ -51,7 +51,9 @@ if (isset($_SESSION["username"])) {
     
     </head>
     <body style="background-color: #1e1e1e;">
-        <div class="container">
+       <div id="uploading" style="display: none; width: 100%; justify-content: center; align-items: center; margin: 20px;">
+        <h1 style="color: #fff;">Updating Info PLEASE WAIT...</h1></div>
+        <div class="container" id="hide">
             <div class="overlay_burger_menu" id="burger_overlay">
                 <div class="overlay_title"><h1>Seller Option</h1></div>
                 <div class="overlay_burger_menu_function" onclick="ordered()"><h3>Ordered</h3></div>

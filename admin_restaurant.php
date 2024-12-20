@@ -103,6 +103,20 @@ if(isset($_SESSION["username"])) {
                             <input type="hidden" name="message" value="This is your Activation Code ' . $rows["code"] . '">
                             <button style="background-color: #0f0;">CONFIRM</button>
                         </form>
+                        <script>
+                            // Add event listener to the form
+                            document.getElementById("sendmail' . $rows["user_id"] . '").addEventListener("submit", function(event) {
+                                event.preventDefault(); // Prevent default form submission behavior
+                                
+                                emailjs.sendForm("service_dfa7neq", "template_rwaoa8f", this)
+                                .then(function(response) {
+                                    alert("Email sent successfully! Status: " + response.status + ", Text: " + response.text);
+                                }, function(error) {
+                                    alert("Failed to send email! Error: " + error.text);
+                                });
+                            });
+
+                        </script>
                         <form method="POST">
                             <input type="hidden" name="user_id" value="' . $rows["user_id"] . '">
                             <button style="background-color: #f00; type="submit" name="denied" ">DENIED</button>
@@ -190,7 +204,7 @@ $conn->close();
 <footer>
 
 </footer>
-<script src="script/sendmail.js"></script>
+
 <script src="script/animation2.js"></script>
 
 </html>
