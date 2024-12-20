@@ -77,10 +77,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </tr>
                     ';
 
+                    $result += $row["prize"];
+                    $tax += $row["tax"];
+
                 }
                 
-                $result += $row["prize"];
-                $tax += $row["tax"];
+               
 
             }
             echo '</tbody>
