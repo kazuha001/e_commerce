@@ -1,3 +1,40 @@
+
+document.getElementById("myform").addEventListener("submit", function(event) {
+
+    event.preventDefault()
+
+    var hideId = document.getElementById("hide")
+
+    var uploadingId = document.getElementById("uploading")
+
+    hideId.style.display = "none"
+
+    uploadingId.style.display = "flex"
+
+    let formData = new FormData(this)
+
+        fetch("update_sellerImg.php", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.success) {
+
+                alert(data.message)
+
+                window.location.reload()
+
+            } else {
+                alert("Error" + data.message)
+
+                window.location.reload()
+            }
+        })
+})
+
+
 var bugershowId = document.getElementById("bugershow")
 
 var burger_overlayId = document.getElementById("burger_overlay")
@@ -61,27 +98,5 @@ document.getElementById("uploadImg").addEventListener("change", function (event)
 
 })
 
-document.getElementById("myform").addEventListener("submit", function(event) {
 
-    let formData = new FormData(this)
-
-        fetch("update_sellerImg.php", {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-
-            if (data.success) {
-
-                alert(data.message)
-
-            } else {
-                alert("Error" + data.message)
-            }
-        })
-        .catch(error => {
-            alert("Server Down To Many Request")
-        })
-})
 

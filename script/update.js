@@ -11,6 +11,14 @@ document.getElementById("myform").addEventListener("submit", function(event) {
 
     var highlights2Id = document.getElementById("highlights2")
 
+    var hideId = document.getElementById("hide")
+
+    var uploadingId = document.getElementById("uploading")
+
+    hideId.style.display = "none"
+
+    uploadingId.style.display = "flex"
+
     if (new_password1Id.value != c_password1Id.value) {
         
         highlightsId.style.border = "2px solid #f00"

@@ -1,3 +1,38 @@
+document.getElementById("myform").addEventListener("submit", function(event) {
+    event.preventDefault()
+    let formData = new FormData(this)
+
+    var hideId = document.getElementById("hide")
+
+    var uploadingId = document.getElementById("uploading")
+
+    hideId.style.display = "none"
+
+    uploadingId.style.display = "flex"
+
+        fetch("add_product.php", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+
+                alert(data.message)
+
+                window.location.reload()
+
+            } else {
+
+                alert("Error" + data.message)
+
+                window.location.reload()
+
+            }
+        })
+})
+
+
 var bugershowId = document.getElementById("bugershow")
 
 var burger_overlayId = document.getElementById("burger_overlay")
@@ -63,28 +98,3 @@ document.getElementById("uploadImg").addEventListener("change", function (event)
 
 })
 
-document.getElementById("myform").addEventListener("submit", function(event) {
-
-    let formData = new FormData(this)
-
-        fetch("add_product.php", {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-
-                alert(data.message)
-
-            } else {
-
-                alert("Error" + data.message)
-
-            }
-        })
-        .catch(error => {
-            alert("Server Down To Many Request Please Refresh the webpage")
-            window.location.reload()
-        })
-})
