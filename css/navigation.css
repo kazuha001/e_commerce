@@ -30,6 +30,7 @@
     justify-content: space-around;
     flex-flow: column;
     margin: 0 0 5px 0;
+    overflow: auto;
 }
 .status button {
     width: 120px;
@@ -45,8 +46,7 @@
 }
 .items {
     width: 330px;
-    height: 170px;
-    overflow: hidden;
+    height: 200px;
     margin: 20px;
     display: flex;
     justify-content: left;

@@ -18,6 +18,7 @@
     height: auto;
     display: flex;
     flex-flow: column;
+    
 }
 .tables_function h1 {
     margin: 10px;
