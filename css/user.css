@@ -232,17 +232,13 @@
     height: auto;
     display: flex;
     flex-flow: column;
+    
 }
 .products_foods_ads_info h3{
     margin: 5px;
 }
 .products_foods_ads_info p{
     margin: 5px;
-}
-.text_limiter {
-    width: 100%;
-    height: 120px;
-    overflow: auto;
 }
 .products_foods_ads_info_funtion {
     width: 100%;
